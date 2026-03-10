@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa3d86ec5fa1d343aeec7ee580dc77e, type: 3}
+  m_Name: IT_BugFix
+  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
+  id: IT_ATK_01
+  cardName: Bug Fix
+  description: "G\xE2y 6 DMG"
+  flavorText: "S\u1EEDa 1 bug, sinh ra 3 bug m\u1EDBi"
+  manaCost: 1
+  type: 0
+  rarity: 0
+  isExhaust: 0
+  upgradedVersion: {fileID: 0}
+  artwork: {fileID: 0}
