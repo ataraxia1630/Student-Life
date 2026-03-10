@@ -22,3 +22,5 @@ MonoBehaviour:
   isExhaust: 0
   upgradedVersion: {fileID: 0}
   artwork: {fileID: 0}
+  effects:
+  - {fileID: 11400000, guid: d9570111198ad144da72ee6f5bd97cbf, type: 2}
