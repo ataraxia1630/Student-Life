@@ -8,6 +8,8 @@ namespace DoiSinhVien.Core
         public string enemyName = "Bug Bự";
         public int currentHealth = 50;
 
+        public int CurrentHealth => currentHealth;
+
         public void TakeDamage(int amount)
         {
             currentHealth -= amount;
@@ -22,6 +24,12 @@ namespace DoiSinhVien.Core
         public void GainBlock(int amount)
         {
             Debug.Log($"[Quái - {enemyName}] Nhận {amount} Giáp (Chưa implement logic giáp cho test này).");
+        }
+
+        public void SetHealth(int amount)
+        {
+            currentHealth = amount;
+            Debug.Log($"[Hệ thống] Máu của {enemyName} được reset về: {currentHealth}");
         }
     }
 }

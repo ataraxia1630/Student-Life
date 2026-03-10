@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using DoiSinhVien.Data;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 namespace DoiSinhVien.Core
 {
@@ -8,33 +9,36 @@ namespace DoiSinhVien.Core
     {
         [Header("Setup Test")]
         public CardData cardToPlay; 
-        public DummyEnemy targetEnemy; 
+        public DummyEnemy targetEnemy;
 
-        public void PlayCard()
-        {
-            if (cardToPlay == null || targetEnemy == null)
-            {
-                Debug.LogError("Thiếu Data! Hãy kéo thả CardData và DummyEnemy vào CombatTester.");
-                return;
-            }
+        private Stack<ICommand> commandHistory = new();
 
-            Debug.Log($"\n--- ĐÁNH BÀI: {cardToPlay.cardName} (Tốn {cardToPlay.manaCost} Energy) ---");
-            Debug.Log($"[Flavor]: {cardToPlay.flavorText}");
-
-            foreach (var effect in cardToPlay.effects)
-            {
-                if (effect != null)
-                {
-                    effect.Execute(targetEnemy);
-                }
-            }
-        }
 
         private void Update()
         {
-            if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+            if (Keyboard.current == null) return;
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
-                PlayCard();
+                if (cardToPlay == null || targetEnemy == null) return;
+
+                ICommand playCmd = new PlayCardCommand(cardToPlay, targetEnemy);
+
+                playCmd.Execute();
+
+                commandHistory.Push(playCmd);
+            }
+
+            if (Keyboard.current.backspaceKey.wasPressedThisFrame)
+            {
+                if (commandHistory.Count > 0)
+                {
+                    ICommand lastCommand = commandHistory.Pop();
+                    lastCommand.Undo();
+                }
+                else
+                {
+                    Debug.Log("Không có hành động nào để Hoàn tác!");
+                }
             }
         }
     }
