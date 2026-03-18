@@ -4,21 +4,36 @@ using DoiSinhVien.Data;
 using DoiSinhVien.Combat;
 using DoiSinhVien.View;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 namespace DoiSinhVien.Core
 {
     public class CombatManager : MonoBehaviour
     {
+        public static CombatManager Instance { get; private set; }
+
         [Header("Logic System")]
         public DeckManager deckManager;
         public List<CardData> starterDeckData; 
-        public DummyEnemy currentEnemy; 
+        public DummyEnemy currentEnemy;
+
+        [Header("Player Stats")]
+        public int maxEnergy = 3;
+        public int currentEnergy;
 
         [Header("View System")]
         public HandView handView;
-        public GameObject cardPrefab; 
+        public GameObject cardPrefab;
+
+        public CombatState CurrentState { get; private set; }
 
         private readonly Dictionary<CardInstance, CardView> cardViewMap = new();
+
+        private void Awake()
+        {
+            if (Instance == null) Instance = this;
+            else Destroy(gameObject);
+        }
 
         private void Start()
         {
@@ -26,76 +41,117 @@ namespace DoiSinhVien.Core
             deckManager.InitializeDeck(starterDeckData);
 
             Debug.Log($"Đã nạp {starterDeckData.Count} lá bài vào Draw Pile.");
+            ChangeState(CombatState.Initialize);
         }
 
-        private void Update()
+        public void ChangeState(CombatState newState)
         {
-            if (Keyboard.current == null) return;
+            CurrentState = newState;
+            Debug.Log($"\n[STATE MACHINE] ---> {newState}");
 
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            switch (newState)
             {
-                DrawCardVisual();
-            }
+                case CombatState.Initialize:
+                    ChangeState(CombatState.Player_Turn_Start);
+                    break;
 
-            if (Keyboard.current.digit1Key.wasPressedThisFrame)
-            {
-                PlayCardVisual(0);
-            }
+                case CombatState.Player_Turn_Start:
+                    currentEnergy = maxEnergy;
+                    StartCoroutine(DrawCardsRoutine(5)); 
+                    break;
 
-            if (Keyboard.current.rKey.wasPressedThisFrame)
-            {
-                ReshuffleDiscardPile();
+                case CombatState.Player_Turn_Active:
+                    Debug.Log("=> TỚI LƯỢT BẠN! Hãy đánh bài hoặc bấm nút End Turn.");
+                    break;
+
+                case CombatState.Enemy_Turn_Start:
+                    ChangeState(CombatState.Enemy_Turn_Active);
+                    break;
+
+                case CombatState.Enemy_Turn_Active:
+                    StartCoroutine(EnemyActionRoutine()); 
+                    break;
+
+                case CombatState.Turn_End_Cleanup:
+                    StartCoroutine(CleanupRoutine()); 
+                    break;
             }
         }
 
-
-        private void DrawCardVisual()
+        private IEnumerator DrawCardsRoutine(int amount)
         {
-            if (deckManager.drawPile.Count == 0)
+            for (int i = 0; i < amount; i++)
             {
-                Debug.Log("Hết bài trong Draw Pile! Bấm R để xáo lại.");
+                deckManager.DrawCard(1);
+
+                if (deckManager.hand.Count == 0) continue;
+
+                CardInstance drawnCard = deckManager.hand[deckManager.hand.Count - 1];
+
+                GameObject cardObj = Instantiate(cardPrefab, handView.transform.position, Quaternion.identity);
+                CardView newCardView = cardObj.GetComponent<CardView>();
+                newCardView.Setup(drawnCard);
+                cardViewMap.Add(drawnCard, newCardView);
+
+                yield return StartCoroutine(handView.AddCard(newCardView));
+            }
+
+            ChangeState(CombatState.Player_Turn_Active);
+        }
+
+        private IEnumerator EnemyActionRoutine()
+        {
+            Debug.Log($"[Enemy] {currentEnemy.enemyName} đang vận nội công...");
+            yield return new WaitForSeconds(1.5f); 
+            Debug.Log($"[Enemy] Hủy diệt!");
+
+            ChangeState(CombatState.Turn_End_Cleanup);
+        }
+
+        private IEnumerator CleanupRoutine()
+        {
+            deckManager.DiscardHand(); 
+
+            foreach (var view in cardViewMap.Values)
+            {
+                if (view != null) Destroy(view.gameObject);
+            }
+            cardViewMap.Clear();
+
+            handView.cards.Clear();
+
+            yield return new WaitForSeconds(0.5f); 
+
+            ChangeState(CombatState.Player_Turn_Start);
+        }
+
+
+        public void OnEndTurn()
+        {
+            if (CurrentState != CombatState.Player_Turn_Active) return;
+            ChangeState(CombatState.Enemy_Turn_Start);
+        }
+
+        public void TryPlayCard(CardView cardView)
+        {
+            if (CurrentState != CombatState.Player_Turn_Active) return;
+
+            CardInstance cardToPlay = cardView.LogicCard;
+
+            if (currentEnergy < cardToPlay.CurrentCost)
+            {
+                Debug.LogWarning("!!! Thiếu Energy, không thể đánh lá này !!!");
                 return;
             }
 
-            deckManager.DrawCard(1);
-            CardInstance newlyDrawnCard = deckManager.hand[deckManager.hand.Count - 1]; 
-
-            GameObject cardObj = Instantiate(cardPrefab, handView.transform.position, Quaternion.identity);
-            CardView newCardView = cardObj.GetComponent<CardView>();
-
-            newCardView.Setup(newlyDrawnCard); 
-            cardViewMap.Add(newlyDrawnCard, newCardView); 
-
-            StartCoroutine(handView.AddCard(newCardView)); 
-        }
-
-        private void PlayCardVisual(int indexInHand)
-        {
-            if (indexInHand >= deckManager.hand.Count) return;
-
-            CardInstance cardToPlay = deckManager.hand[indexInHand];
-            CardView viewToPlay = cardViewMap[cardToPlay];
-
+            currentEnergy -= cardToPlay.CurrentCost;
             ICommand playCmd = new PlayCardCommand(cardToPlay.Data, currentEnemy);
-            playCmd.Execute(); 
-
+            playCmd.Execute();
             deckManager.PlayCardFromHand(cardToPlay);
-
-            StartCoroutine(handView.RemoveCard(viewToPlay));
+            
+            StartCoroutine(handView.RemoveCard(cardView));
             cardViewMap.Remove(cardToPlay);
-
-            Destroy(viewToPlay.gameObject);
-        }
-
-        private void ReshuffleDiscardPile()
-        {
-            if (deckManager.discardPile.Count == 0) return;
-
-            deckManager.drawPile.AddRange(deckManager.discardPile);
-            deckManager.discardPile.Clear();
-            deckManager.ShuffleDrawPile();
-
-            Debug.Log($"Đã xáo lại bài! Draw Pile hiện có: {deckManager.drawPile.Count} lá.");
+            Destroy(cardView.gameObject);
         }
     }
 }
