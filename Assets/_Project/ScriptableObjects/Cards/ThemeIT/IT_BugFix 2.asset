@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baa3d86ec5fa1d343aeec7ee580dc77e, type: 3}
-  m_Name: IT_BugFix
+  m_Name: IT_BugFix 2
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
-  id: IT_ATK_01
-  cardName: Fix Bug
-  description: "G\xE2y 6 DMG"
+  id: IT_ATK_03
+  cardName: Resolve Conflict
+  description: "G\xE2y 10 DMG"
   flavorText: "S\u1EEDa 1 bug, sinh ra 3 bug m\u1EDBi"
-  manaCost: 1
+  manaCost: 2
   type: 0
   rarity: 0
   isExhaust: 0
   upgradedVersion: {fileID: 0}
   artwork: {fileID: 21300000, guid: 4ec7927c478aecf4e8eb3f095d6cf0b5, type: 3}
   effects:
-  - {fileID: 11400000, guid: d9570111198ad144da72ee6f5bd97cbf, type: 2}
+  - {fileID: 11400000, guid: c7fac67f6c247184788e1c63c8841723, type: 2}
