@@ -9,7 +9,7 @@ namespace DoiSinhVien.View
     public class HandView : MonoBehaviour
     {
         [SerializeField] private SplineContainer splineContainer;
-        private readonly List<CardView> cards = new();
+        public List<CardView> cards = new();
 
         public IEnumerator AddCard(CardView cardView)
         {
