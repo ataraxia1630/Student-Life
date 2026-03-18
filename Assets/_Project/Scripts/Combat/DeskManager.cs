@@ -94,5 +94,12 @@ namespace DoiSinhVien.Combat
                 }
             }
         }
+
+        public void DiscardHand()
+        {
+            discardPile.AddRange(hand);
+            hand.Clear();
+            Debug.Log("[DeckManager] Đã dọn dẹp bài trên tay vào Discard Pile.");
+        }
     }
 }
