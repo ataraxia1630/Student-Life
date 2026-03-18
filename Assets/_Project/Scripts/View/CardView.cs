@@ -1,10 +1,12 @@
 ﻿using DoiSinhVien.Combat;
+using DoiSinhVien.Core;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace DoiSinhVien.View
 {
-    public class CardView : MonoBehaviour
+    public class CardView : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private TMP_Text mana;
         [SerializeField] private TMP_Text title;
@@ -26,5 +28,12 @@ namespace DoiSinhVien.View
             }
         }
 
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (CombatManager.Instance != null)
+            {
+                CombatManager.Instance.TryPlayCard(this);
+            }
+        }
     }
 }
