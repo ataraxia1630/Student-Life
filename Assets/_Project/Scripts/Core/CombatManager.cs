@@ -3,7 +3,6 @@ using UnityEngine;
 using DoiSinhVien.Data;
 using DoiSinhVien.Combat;
 using DoiSinhVien.View;
-using UnityEngine.InputSystem;
 using System.Collections;
 
 namespace DoiSinhVien.Core
@@ -14,10 +13,11 @@ namespace DoiSinhVien.Core
 
         [Header("Logic System")]
         public DeckManager deckManager;
-        public List<CardData> starterDeckData; 
-        public DummyEnemy currentEnemy;
+        public List<CardData> starterDeckData;
+        public EnemyController enemyController;
 
         [Header("Player Stats")]
+        public PlayerCharacter player;
         public int maxEnergy = 3;
         public int currentEnergy;
 
@@ -40,6 +40,9 @@ namespace DoiSinhVien.Core
             deckManager = new DeckManager();
             deckManager.InitializeDeck(starterDeckData);
 
+            enemyController.Initialize();
+            player.Initialize();
+
             Debug.Log($"Đã nạp {starterDeckData.Count} lá bài vào Draw Pile.");
             ChangeState(CombatState.Initialize);
         }
@@ -57,15 +60,11 @@ namespace DoiSinhVien.Core
 
                 case CombatState.Player_Turn_Start:
                     currentEnergy = maxEnergy;
-                    StartCoroutine(DrawCardsRoutine(5)); 
+                    StartCoroutine(TurnStartSequence());
                     break;
 
                 case CombatState.Player_Turn_Active:
                     Debug.Log("=> TỚI LƯỢT BẠN! Hãy đánh bài hoặc bấm nút End Turn.");
-                    break;
-
-                case CombatState.Enemy_Turn_Start:
-                    ChangeState(CombatState.Enemy_Turn_Active);
                     break;
 
                 case CombatState.Enemy_Turn_Active:
@@ -76,6 +75,15 @@ namespace DoiSinhVien.Core
                     StartCoroutine(CleanupRoutine()); 
                     break;
             }
+        }
+
+        private IEnumerator TurnStartSequence()
+        {
+            yield return StartCoroutine(EnemyIntentRoutine());
+
+            yield return StartCoroutine(DrawCardsRoutine(5));
+
+            ChangeState(CombatState.Player_Turn_Active);
         }
 
         private IEnumerator DrawCardsRoutine(int amount)
@@ -95,13 +103,19 @@ namespace DoiSinhVien.Core
 
                 yield return StartCoroutine(handView.AddCard(newCardView));
             }
+        }
 
-            ChangeState(CombatState.Player_Turn_Active);
+        private IEnumerator EnemyIntentRoutine()
+        {
+            enemyController.DetermineNextIntent();
+            yield return new WaitForSeconds(1f);
+            Debug.Log($"[Enemy] Ý định đã được xác định: {enemyController.CurrentAction.actionName} ({enemyController.CurrentAction.intentType} {enemyController.CurrentAction.baseValue})");
         }
 
         private IEnumerator EnemyActionRoutine()
         {
-            Debug.Log($"[Enemy] {currentEnemy.enemyName} đang vận nội công...");
+            enemyController.ResetBlock();
+            enemyController.ExecuteIntent(player);
             yield return new WaitForSeconds(1.5f); 
             Debug.Log($"[Enemy] Hủy diệt!");
 
@@ -120,6 +134,8 @@ namespace DoiSinhVien.Core
 
             handView.cards.Clear();
 
+            player.ResetBlock();
+
             yield return new WaitForSeconds(0.5f); 
 
             ChangeState(CombatState.Player_Turn_Start);
@@ -129,7 +145,7 @@ namespace DoiSinhVien.Core
         public void OnEndTurn()
         {
             if (CurrentState != CombatState.Player_Turn_Active) return;
-            ChangeState(CombatState.Enemy_Turn_Start);
+            ChangeState(CombatState.Enemy_Turn_Active);
         }
 
         public void TryPlayCard(CardView cardView)
@@ -145,7 +161,7 @@ namespace DoiSinhVien.Core
             }
 
             currentEnergy -= cardToPlay.CurrentCost;
-            ICommand playCmd = new PlayCardCommand(cardToPlay.Data, currentEnemy);
+            ICommand playCmd = new PlayCardCommand(cardToPlay.Data, enemyController);
             playCmd.Execute();
             deckManager.PlayCardFromHand(cardToPlay);
             
