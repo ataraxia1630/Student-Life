@@ -250,7 +250,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 419728194}
-  - component: {fileID: 419728193}
+  - component: {fileID: 419728195}
   m_Layer: 0
   m_Name: Enemy_BigBux
   m_TagString: Untagged
@@ -258,20 +258,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &419728193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 419728192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f0cd03c271addf409f9f3d920b6b999, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Core.DummyEnemy
-  enemyName: "Bug B\u1EF1"
-  currentHealth: 50
 --- !u!4 &419728194
 Transform:
   m_ObjectHideFlags: 0
@@ -288,6 +274,64 @@ Transform:
   - {fileID: 110091871}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &419728195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419728192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b70ed5dd6be2e747a2c53f3dfb7a5bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Core.EnemyController
+  data: {fileID: 11400000, guid: 3f40b16c5feb9ed4ea34f9e778306c56, type: 2}
+--- !u!1 &438806766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 438806767}
+  - component: {fileID: 438806768}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &438806767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438806766}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.68597, y: 1.05092, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &438806768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438806766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9310559495dff17478f4a28e86009c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Core.PlayerCharacter
+  maxHealth: 100
 --- !u!1 &692609626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,7 +1322,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d59df97229c9d94599cfea3b6aa6537, type: 2}
   - {fileID: 11400000, guid: 27938156f914baa4a9215a626ff9af23, type: 2}
   - {fileID: 11400000, guid: 27938156f914baa4a9215a626ff9af23, type: 2}
-  currentEnemy: {fileID: 419728193}
+  enemyController: {fileID: 419728195}
+  player: {fileID: 438806768}
   maxEnergy: 3
   currentEnergy: 0
   handView: {fileID: 943421981}
@@ -1325,3 +1370,4 @@ SceneRoots:
   - {fileID: 1581023513}
   - {fileID: 419728194}
   - {fileID: 809124157}
+  - {fileID: 438806767}
