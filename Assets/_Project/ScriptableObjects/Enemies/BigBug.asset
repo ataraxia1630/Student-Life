@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e279ee96aee744083e9be2f018a6a8, type: 3}
+  m_Name: BigBug
+  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.EnemyData
+  enemyId: ENEMY_01
+  enemyName: Big Bug
+  maxHealth: 20
+  actionPool:
+  - {fileID: 11400000, guid: d590b073779881645973e5be453179e8, type: 2}
+  - {fileID: 11400000, guid: 3042d53c3c67de843bf80b7b62e780da, type: 2}
+  - {fileID: 11400000, guid: 3042d53c3c67de843bf80b7b62e780da, type: 2}
+  - {fileID: 11400000, guid: d590b073779881645973e5be453179e8, type: 2}
+  - {fileID: 11400000, guid: d590b073779881645973e5be453179e8, type: 2}
+  - {fileID: 11400000, guid: d590b073779881645973e5be453179e8, type: 2}
+  - {fileID: 11400000, guid: 3042d53c3c67de843bf80b7b62e780da, type: 2}
