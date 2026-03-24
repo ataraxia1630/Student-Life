@@ -25,6 +25,9 @@ namespace DoiSinhVien.Core
         public HandView handView;
         public GameObject cardPrefab;
 
+        [Header("Combat State")]
+        public int currentTurn = 1;
+
         public CombatState CurrentState { get; private set; }
 
         private readonly Dictionary<CardInstance, CardView> cardViewMap = new();
@@ -55,6 +58,7 @@ namespace DoiSinhVien.Core
             switch (newState)
             {
                 case CombatState.Initialize:
+                    currentTurn = 1;
                     ChangeState(CombatState.Player_Turn_Start);
                     break;
 
@@ -136,7 +140,9 @@ namespace DoiSinhVien.Core
 
             player.ResetBlock();
 
-            yield return new WaitForSeconds(0.5f); 
+            yield return new WaitForSeconds(0.5f);
+
+            currentTurn++;
 
             ChangeState(CombatState.Player_Turn_Start);
         }
