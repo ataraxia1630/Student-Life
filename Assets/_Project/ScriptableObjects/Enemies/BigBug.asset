@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.EnemyData
   enemyId: ENEMY_01
   enemyName: Big Bug
-  maxHealth: 20
+  enemyPrefab: {fileID: 2279909546300788952, guid: 7157107e144118644b6a06db42b6a998, type: 3}
+  maxHealth: 120
   actionPool:
   - {fileID: 11400000, guid: d590b073779881645973e5be453179e8, type: 2}
   - {fileID: 11400000, guid: 3042d53c3c67de843bf80b7b62e780da, type: 2}
@@ -23,3 +24,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d590b073779881645973e5be453179e8, type: 2}
   - {fileID: 11400000, guid: d590b073779881645973e5be453179e8, type: 2}
   - {fileID: 11400000, guid: 3042d53c3c67de843bf80b7b62e780da, type: 2}
+  tags: 
