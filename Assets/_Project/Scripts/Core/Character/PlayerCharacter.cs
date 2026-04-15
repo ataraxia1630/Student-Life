@@ -11,6 +11,10 @@ namespace DoiSinhVien.Core
         private int currentBlock;
         public int CurrentBlock => currentBlock;
 
+        public int bonusAttackDamage = 0;
+        public int bonusDrawPerTurn = 0;
+        public bool isNextCardDoubled = false;
+
         public void Initialize()
         {
             currentHealth = maxHealth;
