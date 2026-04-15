@@ -77,6 +77,31 @@ namespace DoiSinhVien.Combat
             }
         }
 
+        public void DiscardRandomCardFromHand(int discardAmount)
+        {
+            if (hand.Count == 0)
+            {
+                Debug.LogWarning("[DeckManager] Không có bài nào trên tay để bỏ!");
+                return;
+            }
+
+            if (discardAmount > hand.Count)
+            {
+                Debug.LogWarning($"[DeckManager] Số lượng cần bỏ ({discardAmount}) lớn hơn số bài trên tay ({hand.Count}). Sẽ bỏ hết bài trên tay.");
+                discardAmount = hand.Count;
+            }
+
+            System.Random rng = new System.Random();
+            for (int i = 0; i < discardAmount; i++)
+            {
+                int index = rng.Next(hand.Count);
+                CardInstance discardedCard = hand[index];
+                hand.RemoveAt(index);
+                discardPile.Add(discardedCard);
+                Debug.Log($"[DeckManager] Đã bỏ lá: {discardedCard.Data.cardName} từ tay.");
+            }
+        }
+
         public void PlayCardFromHand(CardInstance card)
         {
             if (hand.Contains(card))
