@@ -9,12 +9,17 @@ namespace DoiSinhVien.Data
         [Header("Damage Settings")]
         public int damageAmount;
 
-        public override void Execute(ITargetable target)
+        public override void Execute(ITargetable self, ITargetable target)
         {
             if (target != null)
             {
-                target.TakeDamage(damageAmount);
-                Debug.Log($"[Effect] Thi triển {effectName}: Gây {damageAmount} sát thương!");
+                int finalDamage = damageAmount;
+                if (self is PlayerCharacter player)
+                {
+                    finalDamage += player.bonusAttackDamage;
+                }
+                target.TakeDamage(finalDamage);
+                Debug.Log($"[Effect] Thi triển {effectName}: Gây {finalDamage} sát thương!");
             }
             else Debug.Log($"[Effect] Thi triển {effectName}: Không có mục tiêu hợp lệ!");
         }

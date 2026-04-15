@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa3d86ec5fa1d343aeec7ee580dc77e, type: 3}
+  m_Name: XinDeadline
+  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
+  id: IT_DEADLINE
+  cardName: "Xin D\u1EDDi Deadline"
+  description: "Block 8. K\u1EBB th\xF9 b\u1ECF qua 1 action."
+  flavorText: 
+  manaCost: 1
+  type: 1
+  rarity: 0
+  isExhaust: 0
+  upgradedVersion: {fileID: 0}
+  artwork: {fileID: 21300000, guid: 4ec7927c478aecf4e8eb3f095d6cf0b5, type: 3}
+  effects:
+  - {fileID: 11400000, guid: e7fc256738fc3a940809f8bee53c0fb7, type: 2}
+  - {fileID: 11400000, guid: 49cf03c520ed81e41af1f37a430e675d, type: 2}

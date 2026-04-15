@@ -13,11 +13,13 @@ namespace DoiSinhVien.Core
     {
         private CardData _card;
         private ITargetable _target;
+        private ITargetable _self;
         private int _healthBeforePlay; 
 
-        public PlayCardCommand(CardData card, ITargetable target)
+        public PlayCardCommand(CardData card, ITargetable self, ITargetable target)
         {
             _card = card;
+            _self = self;
             _target = target;
             _healthBeforePlay = target.CurrentHealth;
         }
@@ -27,7 +29,7 @@ namespace DoiSinhVien.Core
             Debug.Log($"\n>>> [COMMAND THỰC THI] Đánh bài: {_card.cardName} <<<");
             foreach (var effect in _card.effects)
             {
-                if (effect != null) effect.Execute(_target);
+                if (effect != null) effect.Execute(_self, _target);
             }
         }
 
