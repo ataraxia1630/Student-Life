@@ -24,11 +24,28 @@ namespace DoiSinhVien.Core
             else Destroy(gameObject);
         }
 
+        private void Start()
+        {
+            if (RunManager.Instance != null && RunManager.Instance.pendingEncounter != null)
+            {
+                Debug.Log($"Đã nhận lệnh từ Map! Đang sinh quái cho Blueprint: {RunManager.Instance.pendingEncounter.blueprintName}");
+
+                StartBattle(RunManager.Instance.pendingEncounter);
+
+                RunManager.Instance.pendingEncounter = null;
+            }
+            else
+            {
+                Debug.LogWarning("Test Mode: Không có dữ liệu từ Map. Đang tự động test với dữ liệu mặc định (nếu có).");
+            }
+        }
+
         public void StartBattle(EncounterBlueprint blueprint)
         {
             ClearCurrentEnemies();
 
             List<EnemyData> spawnedEnemyData = generator.GenerateEncounter(blueprint);
+            List<EnemyController> controllersForCombat = new();
 
             for (int i = 0; i < spawnedEnemyData.Count; i++)
             {
@@ -53,6 +70,7 @@ namespace DoiSinhVien.Core
                 {
                     controller.data = spawnedEnemyData[i];
                     controller.Initialize();
+                    controllersForCombat.Add(controller);
                 }
                 else
                 {
@@ -60,7 +78,12 @@ namespace DoiSinhVien.Core
                 }
             }
 
-            Debug.Log($"Đã spawn xong {spawnedEnemyData.Count} quái cho Mai nghênh chiến!");
+            Debug.Log($"Đã spawn xong {spawnedEnemyData.Count} quái nghênh chiến!");
+
+            if (CombatManager.Instance != null && controllersForCombat.Count > 0)
+            {
+                CombatManager.Instance.StartCombat(controllersForCombat);
+            }
         }
 
         private void ClearCurrentEnemies()

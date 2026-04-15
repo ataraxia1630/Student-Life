@@ -14,7 +14,9 @@ namespace DoiSinhVien.Core
         [Header("Logic System")]
         public DeckManager deckManager;
         public List<CardData> starterDeckData;
-        public EnemyController enemyController;
+
+        [Header("Enemies on Scene")]
+        public List<EnemyController> activeEnemies = new();
 
         [Header("Player Stats")]
         public PlayerCharacter player;
@@ -38,17 +40,17 @@ namespace DoiSinhVien.Core
             else Destroy(gameObject);
         }
 
-        private void Start()
+        public void StartCombat(List<EnemyController> spawnedEnemies)
         {
-            deckManager = new DeckManager();
-            deckManager.InitializeDeck(starterDeckData);
+            activeEnemies = spawnedEnemies;
 
-            enemyController.Initialize();
+            deckManager = new();
+            deckManager.InitializeDeck(starterDeckData);
             player.Initialize();
 
-            Debug.Log($"Đã nạp {starterDeckData.Count} lá bài vào Draw Pile.");
+            Debug.Log($"BẮT ĐẦU TRẬN ĐẤU! Số lượng quái: {activeEnemies.Count}");
             ChangeState(CombatState.Initialize);
-        }
+        }    
 
         public void ChangeState(CombatState newState)
         {
@@ -77,6 +79,9 @@ namespace DoiSinhVien.Core
 
                 case CombatState.Turn_End_Cleanup:
                     StartCoroutine(CleanupRoutine()); 
+                    break;
+                case CombatState.Combat_Win:
+                    StartCoroutine(HandleVictoryRoutine());
                     break;
             }
         }
@@ -111,18 +116,27 @@ namespace DoiSinhVien.Core
 
         private IEnumerator EnemyIntentRoutine()
         {
-            enemyController.DetermineNextIntent();
+            foreach (var enemy in activeEnemies)
+            {
+                if (enemy.CurrentHealth > 0)
+                {
+                    enemy.DetermineNextIntent();
+                }
+            }
             yield return new WaitForSeconds(1f);
-            Debug.Log($"[Enemy] Ý định đã được xác định: {enemyController.CurrentAction.actionName} ({enemyController.CurrentAction.intentType} {enemyController.CurrentAction.baseValue})");
         }
 
         private IEnumerator EnemyActionRoutine()
         {
-            enemyController.ResetBlock();
-            enemyController.ExecuteIntent(player);
-            yield return new WaitForSeconds(1.5f); 
-            Debug.Log($"[Enemy] Hủy diệt!");
-
+            foreach (var enemy in activeEnemies)
+            {
+                if (enemy.CurrentHealth > 0)
+                {
+                    enemy.ResetBlock();
+                    enemy.ExecuteIntent(player);
+                    yield return new WaitForSeconds(0.8f);
+                }
+            }
             ChangeState(CombatState.Turn_End_Cleanup);
         }
 
@@ -166,14 +180,42 @@ namespace DoiSinhVien.Core
                 return;
             }
 
+            EnemyController targetEnemy = activeEnemies.Find(e => e.CurrentHealth > 0);
+
+            if (targetEnemy == null) return;
+
             currentEnergy -= cardToPlay.CurrentCost;
-            ICommand playCmd = new PlayCardCommand(cardToPlay.Data, enemyController);
+            ICommand playCmd = new PlayCardCommand(cardToPlay.Data, player, targetEnemy);
             playCmd.Execute();
             deckManager.PlayCardFromHand(cardToPlay);
-            
+
             StartCoroutine(handView.RemoveCard(cardView));
             cardViewMap.Remove(cardToPlay);
             Destroy(cardView.gameObject);
+
+            bool isAllEnemiesDead = activeEnemies.TrueForAll(e => e.CurrentHealth <= 0);
+            if (isAllEnemiesDead)
+            {
+                Debug.Log("TOÀN BỘ QUÁI ĐÃ BỊ FIX! CHIẾN THẮNG!");
+                ChangeState(CombatState.Combat_Win);
+            }
+        }
+
+        private IEnumerator HandleVictoryRoutine()
+        {
+            yield return new WaitForSeconds(1f); 
+
+            foreach (var view in cardViewMap.Values)
+            {
+                if (view != null) Destroy(view.gameObject);
+            }
+            cardViewMap.Clear();
+            handView.cards.Clear();
+
+            if (RewardManager.Instance != null)
+            {
+                RewardManager.Instance.GenerateCardRewards();
+            }
         }
     }
 }
