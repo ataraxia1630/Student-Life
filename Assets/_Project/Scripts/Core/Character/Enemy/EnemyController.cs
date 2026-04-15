@@ -13,6 +13,8 @@ namespace DoiSinhVien.Core
 
         public EnemyActionData CurrentAction { get; private set; }
 
+        public bool isStunned; 
+
         public void Initialize()
         {
             CurrentHealth = data.maxHealth;
@@ -34,7 +36,13 @@ namespace DoiSinhVien.Core
         {
             if (CurrentAction != null)
             {
-                CurrentAction.Execute(this, playerTarget);
+                if (isStunned)
+                {
+                    Debug.Log($"[Quái - {data.enemyName}] Bị stun, bỏ qua lượt này!");
+                    isStunned = false;
+                }
+                else
+                    CurrentAction.Execute(this, playerTarget);
                 CurrentAction = null; 
             }
         }
