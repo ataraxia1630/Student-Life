@@ -9,11 +9,17 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
+    path: Assets/_Project/Scenes/Map.unity
+    guid: 9e7ac460b5e22134bb22c56e946216ea
+  - enabled: 1
     path: Assets/_Project/Scenes/RoomSelect.unity
     guid: fac45a1320433364dbe42adc8afcdf46
   - enabled: 1
     path: Assets/_Project/Scenes/CombatPrototype.unity
     guid: 37c2271826006244a96ae45d7a4c80e1
+  - enabled: 1
+    path: Assets/_Project/Scenes/RestPrototype.unity
+    guid: dec1ef083a9d63142b8601fdc8b971c0
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
