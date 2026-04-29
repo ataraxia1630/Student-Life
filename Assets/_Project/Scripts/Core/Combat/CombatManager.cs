@@ -61,6 +61,7 @@ namespace DoiSinhVien.Core
             {
                 case CombatState.Initialize:
                     currentTurn = 1;
+                    GameEvents.OnCombatStart?.Invoke();
                     ChangeState(CombatState.Player_Turn_Start);
                     break;
 
@@ -81,6 +82,7 @@ namespace DoiSinhVien.Core
                     StartCoroutine(CleanupRoutine()); 
                     break;
                 case CombatState.Combat_Win:
+                    GameEvents.OnCombatWin?.Invoke();
                     StartCoroutine(HandleVictoryRoutine());
                     break;
             }
@@ -192,6 +194,8 @@ namespace DoiSinhVien.Core
             StartCoroutine(handView.RemoveCard(cardView));
             cardViewMap.Remove(cardToPlay);
             Destroy(cardView.gameObject);
+
+            GameEvents.OnCardPlayed?.Invoke(cardToPlay);
 
             bool isAllEnemiesDead = activeEnemies.TrueForAll(e => e.CurrentHealth <= 0);
             if (isAllEnemiesDead)

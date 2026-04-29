@@ -5,11 +5,9 @@ namespace DoiSinhVien.Core
     public class PlayerCharacter : MonoBehaviour, ITargetable
     {
         public int maxHealth = 100;
-        private int currentHealth;
-        public int CurrentHealth => currentHealth;
 
-        private int currentBlock;
-        public int CurrentBlock => currentBlock;
+        public int CurrentHealth { get; private set; }
+        public int CurrentBlock { get; private set; }
 
         public int bonusAttackDamage = 0;
         public int bonusDrawPerTurn = 0;
@@ -17,42 +15,42 @@ namespace DoiSinhVien.Core
 
         public void Initialize()
         {
-            currentHealth = maxHealth;
-            currentBlock = 0;
+            CurrentHealth = maxHealth;
+            CurrentBlock = 0;
         }
 
         public void GainBlock(int amount)
         {
-            currentBlock += amount;
+            CurrentBlock += amount;
             Debug.Log($"[Sinh Viên] Tạo {amount} Giáp phòng vệ.");
         }
 
         public void SetHealth(int amount)
         {
-            currentHealth = amount;
+            CurrentHealth = amount;
         }
 
         public void TakeDamage(int amount)
         {
-            if (currentBlock >= amount)
+            if (CurrentBlock >= amount)
             {
-                currentBlock -= amount;
-                Debug.Log($"[Sinh Viên] Block đỡ hết! Mất {amount} Giáp, còn lại {currentBlock} Giáp.");
+                CurrentBlock -= amount;
+                Debug.Log($"[Sinh Viên] Block đỡ hết! Mất {amount} Giáp, còn lại {CurrentBlock} Giáp.");
             }
             else
             {
-                int remainingDamage = amount - currentBlock;
-                currentBlock = 0;
-                currentHealth -= remainingDamage;
-                Debug.Log($"[Sinh Viên] Vỡ Block! Nhận {remainingDamage} sát thương. Tinh thần còn: {currentHealth}");
+                int remainingDamage = amount - CurrentBlock;
+                CurrentBlock = 0;
+                CurrentHealth -= remainingDamage;
+                Debug.Log($"[Sinh Viên] Vỡ Block! Nhận {remainingDamage} sát thương. Tinh thần còn: {CurrentHealth}");
 
-                if (currentHealth <= 0) Debug.Log("[Sinh Viên] BURNOUT! (Game Over)");
+                if (CurrentHealth <= 0) Debug.Log("[Sinh Viên] BURNOUT! (Game Over)");
             }
         }
 
         public void ResetBlock()
         {
-            currentBlock = 0;
+            CurrentBlock = 0;
         }
     }
 }

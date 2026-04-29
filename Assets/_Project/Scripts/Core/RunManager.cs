@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DoiSinhVien.Data;
+using System.Collections.Generic;
 
 namespace DoiSinhVien.Core
 {
@@ -7,12 +8,13 @@ namespace DoiSinhVien.Core
     {
         public static RunManager Instance { get; private set; }
 
-        [Header("Run State Data")]
-        [Tooltip("Blueprint của phòng sắp đánh, truyền từ Map sang Combat")]
         public EncounterBlueprint pendingEncounter;
 
-        // public int currentPlayerHealth;
-        // public List<CardData> currentPlayerDeck;
+        public MapGenerator mapGenerator;
+        public Dictionary<int, MapNodeData> CurrentMap => mapGenerator.MapGraph;
+
+        public int currentNodeId = 0;
+
 
         private void Awake()
         {
@@ -25,6 +27,11 @@ namespace DoiSinhVien.Core
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void Start()
+        {
+            mapGenerator.GenerateNewMap();
         }
     }
 }
