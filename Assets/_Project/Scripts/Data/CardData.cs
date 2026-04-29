@@ -1,13 +1,15 @@
-﻿using UnityEngine;
+﻿using DoiSinhVien.Core;
+using UnityEngine;
 
 namespace DoiSinhVien.Data
 {
     [CreateAssetMenu(fileName = "NewCard", menuName = "Student Life/Card Data")]
-    public class CardData : ScriptableObject
+    public class CardData : ScriptableObject, IPurchasable
     {
         [Header("General Information")]
         public string id; 
-        public string cardName; 
+        public string cardName;
+        public int price;
 
         [TextArea(2, 3)]
         public string description; 
@@ -32,5 +34,13 @@ namespace DoiSinhVien.Data
         [Header("Effects")]
         [Tooltip("Một thẻ bài có thể chứa 1 hoặc nhiều hiệu ứng. Các hiệu ứng sẽ được thi triển tuần tự.")]
         public System.Collections.Generic.List<CardEffectData> effects = new();
+
+        public string ItemName => cardName;
+        public int ItemPrice => price;
+
+        public void OnPurchased()
+        {
+            PlayerInventory.Instance.AddCard(this);
+        }
     }
 }
