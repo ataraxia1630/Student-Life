@@ -187,21 +187,27 @@ namespace DoiSinhVien.Core
             ChangeState(CombatState.Enemy_Turn_Active);
         }
 
-        public void TryPlayCard(CardView cardView)
+        public bool TryPlayCard(CardView cardView, GameObject explicitTarget = null)
         {
-            if (CurrentState != CombatState.Player_Turn_Active) return;
+            if (CurrentState != CombatState.Player_Turn_Active) return false;
 
             CardInstance cardToPlay = cardView.LogicCard;
 
             if (currentEnergy < cardToPlay.CurrentCost)
             {
                 Debug.LogWarning("!!! Thiếu Energy, không thể đánh lá này !!!");
-                return;
+                return false;
             }
 
-            EnemyController targetEnemy = activeEnemies.Find(e => e.CurrentHealth > 0);
+            EnemyController targetEnemy = null;
 
-            if (targetEnemy == null) return;
+            if (explicitTarget != null)
+            {
+                targetEnemy = explicitTarget.GetComponent<EnemyController>();
+            }
+            else targetEnemy = activeEnemies.Find(e => e.CurrentHealth > 0);
+
+            if (targetEnemy == null) return false;
 
             currentEnergy -= cardToPlay.CurrentCost;
             ICommand playCmd = new PlayCardCommand(cardToPlay.Data, player, targetEnemy);
@@ -220,6 +226,7 @@ namespace DoiSinhVien.Core
                 Debug.Log("TOÀN BỘ QUÁI ĐÃ BỊ FIX! CHIẾN THẮNG!");
                 ChangeState(CombatState.Combat_Win);
             }
+            return true;
         }
 
         private IEnumerator HandleVictoryRoutine()
