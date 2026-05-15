@@ -834,6 +834,8 @@ GameObject:
   - component: {fileID: 3968829544426350530}
   - component: {fileID: 6019455014346452597}
   - component: {fileID: 1396047245921093098}
+  - component: {fileID: 5683297236370096413}
+  - component: {fileID: 362779764242344413}
   m_Layer: 0
   m_Name: CardView
   m_TagString: Untagged
@@ -943,3 +945,29 @@ MonoBehaviour:
   smoothSpeed: 15
   normalSortOrder: 0
   hoverSortOrder: 100
+--- !u!225 &5683297236370096413
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6633989021275047220}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &362779764242344413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6633989021275047220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 027f26c45d5d1764f9379f5b3c001ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.UI.CardDragHandler
+  smartDropYThreshold: 300
+  invalidColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.8}

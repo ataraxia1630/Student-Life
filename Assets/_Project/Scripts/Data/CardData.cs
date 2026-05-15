@@ -3,6 +3,14 @@ using UnityEngine;
 
 namespace DoiSinhVien.Data
 {
+    public enum CardTargetType
+    {
+        None,           
+        Self,           
+        SingleEnemy,    
+        AllEnemies      
+    }
+
     [CreateAssetMenu(fileName = "NewCard", menuName = "Student Life/Card Data")]
     public class CardData : ScriptableObject, IPurchasable
     {
@@ -34,6 +42,9 @@ namespace DoiSinhVien.Data
         [Header("Effects")]
         [Tooltip("Một thẻ bài có thể chứa 1 hoặc nhiều hiệu ứng. Các hiệu ứng sẽ được thi triển tuần tự.")]
         public System.Collections.Generic.List<CardEffectData> effects = new();
+
+        [Header("Targeting Logic")] // hiện tại chỉ dùng phục vụ cho visual effect, ko ảnh hưởng đến logic thi triển thẻ
+        public CardTargetType targetType = CardTargetType.SingleEnemy;
 
         public string ItemName => cardName;
         public int ItemPrice => price;
