@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Energy_Minus1
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.ChangeEnergyEffect
   effectName: EnergyMinus1
-  energyAmount: 0
+  energyAmount: -1

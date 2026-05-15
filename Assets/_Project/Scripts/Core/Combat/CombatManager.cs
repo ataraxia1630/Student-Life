@@ -4,6 +4,7 @@ using DoiSinhVien.Data;
 using DoiSinhVien.Combat;
 using DoiSinhVien.View;
 using System.Collections;
+using DoiSinhVien.UI;
 
 namespace DoiSinhVien.Core
 {
@@ -90,6 +91,14 @@ namespace DoiSinhVien.Core
 
         private IEnumerator TurnStartSequence()
         {
+            GameEvents.OnTurnStart?.Invoke();
+            Debug.Log("[TEST] Đã phát OnTurnStart.");
+
+            if (EventPopupUI.Instance != null)
+            {
+                yield return new WaitUntil(() => !EventPopupUI.Instance.IsOpen);
+            }
+
             yield return StartCoroutine(EnemyIntentRoutine());
 
             yield return StartCoroutine(DrawCardsRoutine(5));
@@ -130,6 +139,14 @@ namespace DoiSinhVien.Core
 
         private IEnumerator EnemyActionRoutine()
         {
+            GameEvents.OnTurnEnd?.Invoke();
+            Debug.Log("[TEST] Đã phát OnTurnEnd.");
+
+            if (EventPopupUI.Instance != null)
+            {
+                yield return new WaitUntil(() => !EventPopupUI.Instance.IsOpen);
+            }
+
             foreach (var enemy in activeEnemies)
             {
                 if (enemy.CurrentHealth > 0)

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953f1a565ea6fcd458842d20ba20ac11, type: 3}
+  m_Name: SapIDE
+  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CombatEventData
+  eventName: "S\u1EADp IDE: Visual Studio \u0111\u1ED9t ng\u1ED9t v\u0103ng"
+  description: 
+  triggerTiming: 0
+  triggerChance: 1
+  choices:
+  - choiceText: "C\u1ED1 g\u1EAFng kh\xF4i ph\u1EE5c code (Tr\u1EEB 1 energy)"
+    consequences:
+    - {fileID: 11400000, guid: ebd6eaac187d301459e3217a1f5944a8, type: 2}
+  - choiceText: "\u0110\u1EADp b\xE0n ph\xEDm (-10 tinh th\u1EA7n)"
+    consequences:
+    - {fileID: 11400000, guid: 62c9236aab78cfe488412823219dea6e, type: 2}
