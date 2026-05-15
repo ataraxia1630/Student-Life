@@ -37,6 +37,7 @@ namespace DoiSinhVien.Data
 
         public string ItemName => cardName;
         public int ItemPrice => price;
+        public Sprite ItemIcon => null;
 
         public void OnPurchased()
         {

@@ -20,6 +20,7 @@ namespace DoiSinhVien.Data
 
         public string ItemName => relicName;
         public int ItemPrice => price;
+        public Sprite ItemIcon => icon;
 
         public void OnPurchased()
         {

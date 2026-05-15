@@ -7,6 +7,8 @@ namespace DoiSinhVien.Data
         string ItemName { get; }
         int ItemPrice { get; }
 
+        Sprite ItemIcon { get; }
+
         void OnPurchased();
     }
 }
