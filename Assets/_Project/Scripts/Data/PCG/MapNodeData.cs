@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace DoiSinhVien.Data
 {
@@ -23,6 +24,8 @@ namespace DoiSinhVien.Data
         public List<int> nextNodeIds = new();
 
         public EncounterBlueprint combatBlueprint;
+
+        public Vector2 normalizedPosition;
 
         public MapNodeData(int id, int layer, NodeType type)
         {

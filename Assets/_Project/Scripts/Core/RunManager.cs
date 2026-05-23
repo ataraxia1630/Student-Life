@@ -10,9 +10,6 @@ namespace DoiSinhVien.Core
 
         public EncounterBlueprint pendingEncounter;
 
-        public MapGenerator mapGenerator;
-        public Dictionary<int, MapNodeData> CurrentMap => mapGenerator.MapGraph;
-
         public int currentNodeId = 0;
 
 
@@ -27,11 +24,6 @@ namespace DoiSinhVien.Core
             {
                 Destroy(gameObject);
             }
-        }
-
-        private void Start()
-        {
-            mapGenerator.GenerateNewMap();
         }
     }
 }
