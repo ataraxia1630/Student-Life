@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -288,5 +289,10 @@ MonoBehaviour:
     type: 0
     nextNodeIds: 
     combatBlueprint: {fileID: 0}
+    normalizedPosition: {x: 0, y: 0}
+  iconImage: {fileID: 6019157981604845929}
   nodeText: {fileID: 3521834056439367051}
   nodeButton: {fileID: 2826375759589971724}
+  combatSceneName: CombatPrototype
+  shopSceneName: Shop
+  restSceneName: RestPrototype
