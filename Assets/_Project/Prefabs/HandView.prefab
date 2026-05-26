@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.View.HandView
   splineContainer: {fileID: 9024324790194328950}
+  cardPrefab: {fileID: 6633989021275047220, guid: b1a7eecfa12775d4e9c97bd991439137, type: 3}
   cards: []
 --- !u!1 &8711046680475204913
 GameObject:

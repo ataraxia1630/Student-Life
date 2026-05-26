@@ -15,7 +15,7 @@ MonoBehaviour:
   eventName: "S\u1EADp IDE: Visual Studio \u0111\u1ED9t ng\u1ED9t v\u0103ng"
   description: 
   triggerTiming: 0
-  triggerChance: 1
+  triggerChance: 0.1
   choices:
   - choiceText: "C\u1ED1 g\u1EAFng kh\xF4i ph\u1EE5c code (Tr\u1EEB 1 energy)"
     consequences:

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using DoiSinhVien.Data;
+using UnityEngine.SceneManagement;
+using DoiSinhVien.View;
 
 namespace DoiSinhVien.Core
 {
@@ -8,11 +10,15 @@ namespace DoiSinhVien.Core
     {
         public static RewardManager Instance { get; private set; }
 
-        [Header("Database")]
-        public List<CardData> entireCardPool; 
+        [Header("UI References")]
+        public GameObject rewardPanel;
+        public List<RewardCardView> rewardCardSlots;
 
-        [Header("Player Meta")]
-        public List<CardData> playerMasterDeck; 
+        [Header("Database")]
+        public List<CardData> entireCardPool;
+
+        [Header("Scene Config")]
+        public string mapSceneName = "Map";
 
         private void Awake()
         {
@@ -23,33 +29,46 @@ namespace DoiSinhVien.Core
         public void GenerateCardRewards()
         {
             Debug.Log("\n--- PHẦN THƯỞNG CHIẾN THẮNG ---");
+            rewardPanel.SetActive(true);
+
+            List<CardData> pool = new(entireCardPool);
             List<CardData> offeredCards = new();
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < rewardCardSlots.Count; i++)
             {
-                CardData randomCard = entireCardPool[Random.Range(0, entireCardPool.Count)];
-                offeredCards.Add(randomCard);
-
-                Debug.Log($"Lựa chọn {i + 1}: {randomCard.cardName}");
+                if (pool.Count > 0)
+                {
+                    int randomIndex = Random.Range(0, pool.Count);
+                    offeredCards.Add(pool[randomIndex]);
+                    pool.RemoveAt(randomIndex); 
+                }
             }
 
-            // TODO: Bật Canvas UI Reward hiển thị 3 thẻ này lên màn hình
-            Debug.Log("Hãy chọn 1 thẻ để đưa vào Master Deck!");
+            for (int i = 0; i < rewardCardSlots.Count; i++)
+            {
+                if (i < offeredCards.Count)
+                {
+                    rewardCardSlots[i].Setup(offeredCards[i]);
+                    rewardCardSlots[i].gameObject.SetActive(true);
+                }
+                else rewardCardSlots[i].gameObject.SetActive(false);
+            }
         }
 
-        // Hàm này sẽ được gọi khi bấm vào UI Thẻ bài trên màn hình Reward
         public void ClaimCard(CardData chosenCard)
         {
-            playerMasterDeck.Add(chosenCard);
-            Debug.Log($"Đã thêm [{chosenCard.cardName}] vào bộ bài vĩnh viễn!");
+            PlayerInventory.Instance.AddCard(chosenCard);
 
-            // Kết thúc phòng, chuẩn bị mở Map cho phòng tiếp theo
+            rewardPanel.SetActive(false);
+            SceneManager.LoadScene(mapSceneName);
         }
 
         public void SkipReward()
         {
-            // +15 Credit theo GDD
-            Debug.Log("Bỏ qua thẻ, nhận 15 Credit!");
+            PlayerInventory.Instance.AddCredits(15);
+
+            rewardPanel.SetActive(false);
+            SceneManager.LoadScene(mapSceneName);
         }
     }
 }

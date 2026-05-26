@@ -14,7 +14,6 @@ namespace DoiSinhVien.Core
 
         [Header("Logic System")]
         public DeckManager deckManager;
-        public List<CardData> starterDeckData;
 
         [Header("Enemies on Scene")]
         public List<EnemyController> activeEnemies = new();
@@ -26,14 +25,13 @@ namespace DoiSinhVien.Core
 
         [Header("View System")]
         public HandView handView;
-        public GameObject cardPrefab;
 
         [Header("Combat State")]
         public int currentTurn = 1;
 
         public CombatState CurrentState { get; private set; }
 
-        private readonly Dictionary<CardInstance, CardView> cardViewMap = new();
+        public int pendingDiscardCount = 0;
 
         private void Awake()
         {
@@ -46,7 +44,7 @@ namespace DoiSinhVien.Core
             activeEnemies = spawnedEnemies;
 
             deckManager = new();
-            deckManager.InitializeDeck(starterDeckData);
+            deckManager.InitializeDeck(PlayerInventory.Instance.masterDeck);
             player.Initialize();
 
             Debug.Log($"BẮT ĐẦU TRẬN ĐẤU! Số lượng quái: {activeEnemies.Count}");
@@ -111,17 +109,7 @@ namespace DoiSinhVien.Core
             for (int i = 0; i < amount; i++)
             {
                 deckManager.DrawCard(1);
-
-                if (deckManager.hand.Count == 0) continue;
-
-                CardInstance drawnCard = deckManager.hand[deckManager.hand.Count - 1];
-
-                GameObject cardObj = Instantiate(cardPrefab, handView.transform.position, Quaternion.identity);
-                CardView newCardView = cardObj.GetComponent<CardView>();
-                newCardView.Setup(drawnCard);
-                cardViewMap.Add(drawnCard, newCardView);
-
-                yield return StartCoroutine(handView.AddCard(newCardView));
+                yield return new WaitForSeconds(0.2f); 
             }
         }
 
@@ -161,22 +149,11 @@ namespace DoiSinhVien.Core
 
         private IEnumerator CleanupRoutine()
         {
-            deckManager.DiscardHand(); 
-
-            foreach (var view in cardViewMap.Values)
-            {
-                if (view != null) Destroy(view.gameObject);
-            }
-            cardViewMap.Clear();
-
-            handView.cards.Clear();
-
+            deckManager.DiscardHand();
+            // HandView tự động xóa bài thông qua Event OnCardDiscarded lúc DiscardHand chạy!
             player.ResetBlock();
-
             yield return new WaitForSeconds(0.5f);
-
             currentTurn++;
-
             ChangeState(CombatState.Player_Turn_Start);
         }
 
@@ -212,12 +189,8 @@ namespace DoiSinhVien.Core
             currentEnergy -= cardToPlay.CurrentCost;
             ICommand playCmd = new PlayCardCommand(cardToPlay.Data, player, targetEnemy);
             playCmd.Execute();
+
             deckManager.PlayCardFromHand(cardToPlay);
-
-            StartCoroutine(handView.RemoveCard(cardView));
-            cardViewMap.Remove(cardToPlay);
-            Destroy(cardView.gameObject);
-
             GameEvents.OnCardPlayed?.Invoke(cardToPlay);
 
             bool isAllEnemiesDead = activeEnemies.TrueForAll(e => e.CurrentHealth <= 0);
@@ -231,18 +204,32 @@ namespace DoiSinhVien.Core
 
         private IEnumerator HandleVictoryRoutine()
         {
-            yield return new WaitForSeconds(1f); 
-
-            foreach (var view in cardViewMap.Values)
-            {
-                if (view != null) Destroy(view.gameObject);
-            }
-            cardViewMap.Clear();
-            handView.cards.Clear();
+            yield return new WaitForSeconds(1f);
+            deckManager.DiscardHand();
 
             if (RewardManager.Instance != null)
             {
                 RewardManager.Instance.GenerateCardRewards();
+            }
+        }
+
+        public void StartDiscarding(int amount)
+        {
+            if (deckManager.hand.Count == 0) return;
+
+            pendingDiscardCount = Mathf.Min(amount, deckManager.hand.Count);
+            ChangeState(CombatState.Player_Discarding);
+        }
+
+        public void DiscardSelectedCard(CardView cardView)
+        {
+            deckManager.DiscardSpecificCardFromHand(cardView.LogicCard);
+
+            pendingDiscardCount--;
+
+            if (pendingDiscardCount <= 0)
+            {
+                ChangeState(CombatState.Player_Turn_Active);
             }
         }
     }
