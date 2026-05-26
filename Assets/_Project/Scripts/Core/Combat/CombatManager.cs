@@ -14,7 +14,6 @@ namespace DoiSinhVien.Core
 
         [Header("Logic System")]
         public DeckManager deckManager;
-        public List<CardData> starterDeckData;
 
         [Header("Enemies on Scene")]
         public List<EnemyController> activeEnemies = new();
@@ -45,7 +44,7 @@ namespace DoiSinhVien.Core
             activeEnemies = spawnedEnemies;
 
             deckManager = new();
-            deckManager.InitializeDeck(starterDeckData);
+            deckManager.InitializeDeck(PlayerInventory.Instance.masterDeck);
             player.Initialize();
 
             Debug.Log($"BẮT ĐẦU TRẬN ĐẤU! Số lượng quái: {activeEnemies.Count}");
@@ -206,12 +205,11 @@ namespace DoiSinhVien.Core
         private IEnumerator HandleVictoryRoutine()
         {
             yield return new WaitForSeconds(1f);
-            // Có thể gọi deckManager.DiscardHand() ở đây để xóa sạch bài trên tay khi win luôn
             deckManager.DiscardHand();
 
             if (RewardManager.Instance != null)
             {
-                // Mở cửa sổ chọn bài
+                RewardManager.Instance.GenerateCardRewards();
             }
         }
 
