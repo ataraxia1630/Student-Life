@@ -10,10 +10,10 @@ namespace DoiSinhVien.Data
 
         public override void Execute(ITargetable self, ITargetable target)
         {
-            if (CombatManager.Instance != null && CombatManager.Instance.deckManager != null)
+            if (CombatManager.Instance != null)
             {
-                CombatManager.Instance.deckManager.DiscardRandomCardFromHand(discardAmount);
-                Debug.Log($"[Effect] Đã bỏ đi {discardAmount} lá bài!");
+                CombatManager.Instance.StartDiscarding(discardAmount);
+                Debug.Log($"[Effect] Bắt đầu chờ người chơi chọn {discardAmount} lá để bỏ!");
             }
         }
     }

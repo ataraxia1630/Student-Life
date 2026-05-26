@@ -30,7 +30,13 @@ namespace DoiSinhVien.View
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (CombatManager.Instance != null)
+            if (CombatManager.Instance == null) return;
+
+            if (CombatManager.Instance.CurrentState == CombatState.Player_Discarding)
+            {
+                CombatManager.Instance.DiscardSelectedCard(this);
+            }
+            else
             {
                 CombatManager.Instance.TryPlayCard(this);
             }

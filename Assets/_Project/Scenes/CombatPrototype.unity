@@ -1726,8 +1726,8 @@ MonoBehaviour:
   maxEnergy: 3
   currentEnergy: 0
   handView: {fileID: 943421981}
-  cardPrefab: {fileID: 6633989021275047220, guid: b1a7eecfa12775d4e9c97bd991439137, type: 3}
   currentTurn: 1
+  pendingDiscardCount: 0
 --- !u!114 &1472055562
 MonoBehaviour:
   m_ObjectHideFlags: 0

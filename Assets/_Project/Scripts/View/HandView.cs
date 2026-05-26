@@ -1,4 +1,6 @@
 ﻿using DG.Tweening;
+using DoiSinhVien.Combat;
+using DoiSinhVien.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +11,41 @@ namespace DoiSinhVien.View
     public class HandView : MonoBehaviour
     {
         [SerializeField] private SplineContainer splineContainer;
+        [SerializeField] private GameObject cardPrefab; 
+
         public List<CardView> cards = new();
+
+        private void OnEnable()
+        {
+            GameEvents.OnCardDrawn += AddCardToHandVisual;
+            GameEvents.OnCardDiscarded += RemoveCardFromHandVisual;
+            GameEvents.OnCardPlayed += RemoveCardFromHandVisual;
+        }
+
+        private void OnDisable()
+        {
+            GameEvents.OnCardDrawn -= AddCardToHandVisual;
+            GameEvents.OnCardDiscarded -= RemoveCardFromHandVisual;
+            GameEvents.OnCardPlayed -= RemoveCardFromHandVisual;
+        }
+
+        private void AddCardToHandVisual(CardInstance newCard)
+        {
+            GameObject cardObj = Instantiate(cardPrefab, transform.position, Quaternion.identity, transform);
+            CardView newCardView = cardObj.GetComponent<CardView>();
+            newCardView.Setup(newCard);
+
+            StartCoroutine(AddCard(newCardView));
+        }
+
+        private void RemoveCardFromHandVisual(CardInstance cardToRemove)
+        {
+            CardView cardView = cards.Find(c => c.LogicCard == cardToRemove);
+            if (cardView == null) return;
+
+            cards.Remove(cardView);
+            StartCoroutine(RemoveCard(cardView));
+        }
 
         public IEnumerator AddCard(CardView cardView)
         {
@@ -19,11 +55,8 @@ namespace DoiSinhVien.View
 
         public IEnumerator RemoveCard(CardView cardView)
         {
-            if (cards.Contains(cardView))
-            {
-                cards.Remove(cardView);
-                yield return UpdateCardPositions(0.15f);
-            }
+            yield return UpdateCardPositions(0.15f);
+            Destroy(cardView.gameObject, 0.1f);
         }
 
         private IEnumerator UpdateCardPositions(float duration)

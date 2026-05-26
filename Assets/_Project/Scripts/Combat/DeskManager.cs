@@ -1,4 +1,5 @@
-﻿using DoiSinhVien.Data;
+﻿using DoiSinhVien.Core;
+using DoiSinhVien.Data;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace DoiSinhVien.Combat
         public List<CardInstance> discardPile = new();
         public List<CardInstance> exhaustPile = new();
 
-        private const int MAX_HAND_SIZE = 7; 
+        private const int MAX_HAND_SIZE = 5; 
 
         public void InitializeDeck(List<CardData> starterDeck)
         {
@@ -48,6 +49,11 @@ namespace DoiSinhVien.Combat
         {
             for (int i = 0; i < amount; i++)
             {
+                if (hand.Count >= MAX_HAND_SIZE)
+                {
+                    Debug.Log($"[DeckManager] Tay đã đầy ({hand.Count}/{MAX_HAND_SIZE}). Dừng rút bài.");
+                    break;                    
+                }
                 if (drawPile.Count == 0)
                 {
                     if (discardPile.Count == 0)
@@ -74,6 +80,8 @@ namespace DoiSinhVien.Combat
                 drawPile.RemoveAt(0);
                 hand.Add(drawnCard);
                 Debug.Log($"[DeckManager] Đã rút lá: {drawnCard.Data.cardName}");
+
+                GameEvents.OnCardDrawn?.Invoke(drawnCard);
             }
         }
 
@@ -99,6 +107,20 @@ namespace DoiSinhVien.Combat
                 hand.RemoveAt(index);
                 discardPile.Add(discardedCard);
                 Debug.Log($"[DeckManager] Đã bỏ lá: {discardedCard.Data.cardName} từ tay.");
+
+                GameEvents.OnCardDiscarded?.Invoke(discardedCard);
+            }
+        }
+
+        public void DiscardSpecificCardFromHand(CardInstance cardToDiscard)
+        {
+            if (hand.Contains(cardToDiscard))
+            {
+                hand.Remove(cardToDiscard);
+                discardPile.Add(cardToDiscard);
+                Debug.Log($"[DeckManager] Người chơi đã CHỌN BỎ lá: {cardToDiscard.Data.cardName}");
+
+                GameEvents.OnCardDiscarded?.Invoke(cardToDiscard);
             }
         }
 
@@ -122,8 +144,16 @@ namespace DoiSinhVien.Combat
 
         public void DiscardHand()
         {
-            discardPile.AddRange(hand);
+            if (hand.Count == 0) return;
+
+            foreach (var card in hand)
+            {
+                discardPile.Add(card);
+                GameEvents.OnCardDiscarded?.Invoke(card);
+            }
+
             hand.Clear();
+
             Debug.Log("[DeckManager] Đã dọn dẹp bài trên tay vào Discard Pile.");
         }
     }
