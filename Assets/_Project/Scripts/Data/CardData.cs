@@ -29,6 +29,7 @@ namespace DoiSinhVien.Data
         public int manaCost; 
         public CardType type;
         public CardRarity rarity;
+        public bool isUnplayable;
 
         [Header("Mechanics")]
         [Tooltip("Có bị loại bỏ khỏi deck sau khi dùng không?")]

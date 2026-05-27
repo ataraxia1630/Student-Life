@@ -62,7 +62,7 @@ namespace DoiSinhVien.UI
                 if (_enemy.CurrentAction != null)
                 {
                     intentGroup.SetActive(true);
-                    intentText.text = _enemy.CurrentAction.baseValue.ToString();
+                    intentText.text = _enemy.CurrentIntentValue.ToString();
 
                     if (_enemy.CurrentAction.intentType == IntentType.Attack)
                         intentIcon.sprite = iconAttack;

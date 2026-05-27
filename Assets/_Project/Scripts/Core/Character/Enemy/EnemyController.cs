@@ -10,8 +10,10 @@ namespace DoiSinhVien.Core
 
         public int CurrentHealth { get; private set; }
         public int CurrentBlock { get; private set; }
+        public int CurrentStrength { get; private set; }
 
         public EnemyActionData CurrentAction { get; private set; }
+        public int CurrentIntentValue { get; private set; }
 
         public bool isStunned; 
 
@@ -19,6 +21,7 @@ namespace DoiSinhVien.Core
         {
             CurrentHealth = data.maxHealth;
             CurrentBlock = 0;
+            CurrentStrength = 0;
             Debug.Log($"[Spawn] {data.enemyName} xuất hiện với {CurrentHealth} HP.");
         }
 
@@ -29,7 +32,11 @@ namespace DoiSinhVien.Core
             int randomIndex = Random.Range(0, data.actionPool.Count);
             CurrentAction = data.actionPool[randomIndex];
 
-            Debug.Log($"[Intent] {data.enemyName} chuẩn bị dùng {CurrentAction.actionName} ({CurrentAction.intentType} {CurrentAction.baseValue})");
+            CurrentIntentValue = CurrentAction.RollValue();
+            int displayValue = CurrentIntentValue;
+            if (CurrentAction.intentType == IntentType.Attack) displayValue += CurrentStrength;
+
+            Debug.Log($"[Intent] {data.enemyName} chuẩn bị dùng {CurrentAction.actionName} ({CurrentAction.intentType} {displayValue})");
         }
 
         public void ExecuteIntent(ITargetable playerTarget)
@@ -42,7 +49,7 @@ namespace DoiSinhVien.Core
                     isStunned = false;
                 }
                 else
-                    CurrentAction.Execute(this, playerTarget);
+                    CurrentAction.Execute(this, playerTarget, CurrentIntentValue);
                 CurrentAction = null; 
             }
         }
@@ -64,6 +71,7 @@ namespace DoiSinhVien.Core
                 if (CurrentHealth <= 0)
                 {
                     Debug.Log($"[Quái - {data.enemyName}] Đã bị fix (Bay màu)!");
+                    // Gọi event quái chết để cập nhật list activeEnemies
                 }
             }
         }
@@ -84,6 +92,12 @@ namespace DoiSinhVien.Core
         {
             CurrentBlock = 0;
             Debug.Log($"[Hệ thống] Giáp của {data.enemyName} được reset về 0");
+        }
+
+        public void GainStrength(int amount)
+        {
+            CurrentStrength += amount;
+            Debug.Log($"[Quái - {data.enemyName}] Nổi điên! Tăng {amount} Sức mạnh. Sức mạnh hiện tại: {CurrentStrength}");
         }
     }
 }
