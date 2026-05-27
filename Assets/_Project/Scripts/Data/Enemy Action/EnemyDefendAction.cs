@@ -6,10 +6,10 @@ namespace DoiSinhVien.Data
     [CreateAssetMenu(fileName = "Enemy_Defend", menuName = "Student Life/Enemy Actions/Defend")]
     public class EnemyDefendAction : EnemyActionData
     {
-        public override void Execute(ITargetable self, ITargetable target)
+        public override void Execute(ITargetable self, ITargetable target, int value)
         {
             Debug.Log($"[Quái] Tung chiêu {actionName}!");
-            self.GainBlock(baseValue); 
+            self.GainBlock(value); 
         }
     }
 }

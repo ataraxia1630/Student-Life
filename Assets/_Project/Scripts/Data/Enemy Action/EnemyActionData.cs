@@ -7,8 +7,15 @@ namespace DoiSinhVien.Data
     {
         public string actionName;
         public IntentType intentType;
-        public int baseValue; 
 
-        public abstract void Execute(ITargetable self, ITargetable target);
+        public int minValue = 1;
+        public int maxValue = 5;
+
+        public int RollValue()
+        {
+            return Random.Range(minValue, maxValue + 1);
+        }
+
+        public abstract void Execute(ITargetable self, ITargetable target, int value);
     }
 }
