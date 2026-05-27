@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21d63c6fb002e2341877e7504d2ddb41, type: 3}
-  m_Name: Atk_5
-  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.EnemyAttackAction
-  actionName: Attack 5
-  intentType: 0
-  baseValue: 5
+  m_Script: {fileID: 11500000, guid: f651beb63aa02f641b70f4d3ff227897, type: 3}
+  m_Name: Defend_lv1
+  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.EnemyDefendAction
+  actionName: Defend lv1
+  intentType: 1
+  minValue: 1
+  maxValue: 8

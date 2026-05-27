@@ -7,7 +7,8 @@ namespace DoiSinhVien.Data
         Attack, 
         Defend, 
         Skill,  
-        Power   
+        Power,
+        Trash
     }
 
     public enum CardRarity

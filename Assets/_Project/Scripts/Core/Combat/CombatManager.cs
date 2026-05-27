@@ -170,6 +170,13 @@ namespace DoiSinhVien.Core
 
             CardInstance cardToPlay = cardView.LogicCard;
 
+            if (cardToPlay.Data.isUnplayable)
+            {
+                Debug.LogWarning("!!! Đây là bài Rác, không thể đánh ra !!!");
+                // có thể gọi Animation lắc nhẹ lá bài kèm âm thanh "bíp" báo lỗi
+                return false;
+            }
+
             if (currentEnergy < cardToPlay.CurrentCost)
             {
                 Debug.LogWarning("!!! Thiếu Energy, không thể đánh lá này !!!");

@@ -666,7 +666,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Core.EncounterGenerator
   entireEnemyPool:
+  - {fileID: 11400000, guid: 54383129c1e3c294990071aaedbca672, type: 2}
   - {fileID: 11400000, guid: 3f40b16c5feb9ed4ea34f9e778306c56, type: 2}
+  - {fileID: 11400000, guid: 4958d55a9a0bc5e46a9ce83ce83242e0, type: 2}
+  - {fileID: 11400000, guid: 315456768d4a0ec4a9dc4a495af2268d, type: 2}
+  - {fileID: 11400000, guid: ea02436bda743094b90a166772310799, type: 2}
 --- !u!224 &856254066 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2908292392211311261, guid: 6c352389e4c871d4993ee8516ec58511, type: 3}

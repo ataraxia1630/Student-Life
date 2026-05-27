@@ -10,15 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6e279ee96aee744083e9be2f018a6a8, type: 3}
-  m_Name: BigBug
+  m_Name: SmallBug
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.EnemyData
-  enemyId: ENEMY_01
-  enemyName: Big Bug
+  enemyId: ENEMY_02
+  enemyName: Small Bug
   enemyPrefab: {fileID: 2279909546300788952, guid: 7157107e144118644b6a06db42b6a998, type: 3}
-  maxHealth: 20
+  maxHealth: 10
   actionPool:
   - {fileID: 11400000, guid: d590b073779881645973e5be453179e8, type: 2}
   - {fileID: 11400000, guid: 3042d53c3c67de843bf80b7b62e780da, type: 2}
-  - {fileID: 11400000, guid: d0e75ff2982d5cc4db751a94fce8d525, type: 2}
-  - {fileID: 11400000, guid: b8d6d60b837b5304cae3f184a01bc7f6, type: 2}
   tags: 00000000

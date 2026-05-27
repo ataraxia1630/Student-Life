@@ -151,8 +151,10 @@ MonoBehaviour:
   totalLayers: 5
   nodesPerLayer: 3
   easyBlueprints:
-  - {fileID: 11400000, guid: 98fd1350b6860f24a8d4c75ee1fa8f32, type: 2}
-  bossBlueprint: {fileID: 11400000, guid: 98fd1350b6860f24a8d4c75ee1fa8f32, type: 2}
+  - {fileID: 11400000, guid: b54321108afdf8047b003867521483db, type: 2}
+  - {fileID: 11400000, guid: 2bb5bf09c313fea4c8b7006f76c95261, type: 2}
+  - {fileID: 11400000, guid: 0ea43558f0b19dc45a8d21b4a2fe511a, type: 2}
+  bossBlueprint: {fileID: 11400000, guid: 0ea43558f0b19dc45a8d21b4a2fe511a, type: 2}
 --- !u!4 &19623645
 Transform:
   m_ObjectHideFlags: 0
