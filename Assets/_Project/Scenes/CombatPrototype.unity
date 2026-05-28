@@ -2074,33 +2074,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 2133012022}
     m_Modifications:
     - target: {fileID: 2715045807325050975, guid: 8c6143482d4ce9a4daaf709a940c5985, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2715045807325050975, guid: 8c6143482d4ce9a4daaf709a940c5985, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2715045807325050975, guid: 8c6143482d4ce9a4daaf709a940c5985, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1972734639}
-    - target: {fileID: 2715045807325050975, guid: 8c6143482d4ce9a4daaf709a940c5985, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2715045807325050975, guid: 8c6143482d4ce9a4daaf709a940c5985, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SkipReward
-      objectReference: {fileID: 0}
-    - target: {fileID: 2715045807325050975, guid: 8c6143482d4ce9a4daaf709a940c5985, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DoiSinhVien.Core.RewardManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2715045807325050975, guid: 8c6143482d4ce9a4daaf709a940c5985, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 2916341280242867607, guid: 8c6143482d4ce9a4daaf709a940c5985, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

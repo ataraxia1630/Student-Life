@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BlueprintFloor3
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.EncounterBlueprint
   blueprintName: Floor 3
-  targetFloor: 2
+  targetFloor: 3
   slots:
   - requiredTags: 00000000
     forbiddenTags: 

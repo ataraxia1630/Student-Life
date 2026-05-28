@@ -64,6 +64,7 @@ namespace DoiSinhVien.UI
             Debug.Log($"Đang di chuyển tới phòng: {nodeData.type}");
 
             RunManager.Instance.currentNodeId = nodeData.id;
+            RunManager.Instance.currentRoomType = nodeData.type;
 
             switch (nodeData.type)
             {

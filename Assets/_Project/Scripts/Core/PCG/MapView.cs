@@ -8,8 +8,7 @@ namespace DoiSinhVien.Core
 {
     public class MapView : MonoBehaviour
     {
-        [Header("Logic References")]
-        public MapGenerator mapGenerator;
+        [Header("Visual")]
         public MapVisualSettings visualSettings;
 
         [Header("UI References")]
@@ -19,7 +18,15 @@ namespace DoiSinhVien.Core
 
         private void Start()
         {
-            mapGenerator.GenerateNewMap();
+            if (MapGenerator.Instance.MapGraph.Count == 0)
+            {
+                Debug.Log("Lần đầu vào game, đang sinh bản đồ mới...");
+                MapGenerator.Instance.GenerateNewMap();
+            }
+            else
+            {
+                Debug.Log("Đã có dữ liệu bản đồ cũ, giữ nguyên hiện trạng!");
+            }
             DrawMap();
         }
 
@@ -28,7 +35,7 @@ namespace DoiSinhVien.Core
             float width = mapContainer.rect.width;
             float height = mapContainer.rect.height;
 
-            foreach (var layer in mapGenerator.MapLayers)
+            foreach (var layer in MapGenerator.Instance.MapLayers)
             {
                 foreach (var node in layer)
                 {
@@ -36,7 +43,7 @@ namespace DoiSinhVien.Core
 
                     foreach (var nextId in node.nextNodeIds)
                     {
-                        if (mapGenerator.MapGraph.TryGetValue(nextId, out MapNodeData targetNode))
+                        if (MapGenerator.Instance.MapGraph.TryGetValue(nextId, out MapNodeData targetNode))
                         {
                             Vector2 endPos = new Vector2(targetNode.normalizedPosition.x * width, targetNode.normalizedPosition.y * height);
                             DrawLine(startPos, endPos);
@@ -45,7 +52,7 @@ namespace DoiSinhVien.Core
                 }
             }
 
-            foreach (var layer in mapGenerator.MapLayers)
+            foreach (var layer in MapGenerator.Instance.MapLayers)
             {
                 foreach (var node in layer)
                 {
@@ -62,7 +69,7 @@ namespace DoiSinhVien.Core
                     {
                         bool isClickable = false;
                         int currentId = RunManager.Instance.currentNodeId;
-                        if (mapGenerator.MapGraph.TryGetValue(currentId, out MapNodeData currentNode))
+                        if (MapGenerator.Instance.MapGraph.TryGetValue(currentId, out MapNodeData currentNode))
                         {
                             if (currentNode.nextNodeIds.Contains(node.id))
                             {

@@ -32,8 +32,30 @@ namespace DoiSinhVien.Core
             rewardPanel.SetActive(true);
 
             List<CardData> pool = new(entireCardPool);
-            List<CardData> offeredCards = new();
 
+            bool isElite = RunManager.Instance != null && RunManager.Instance.currentRoomType == NodeType.Elite;
+
+            if (isElite)
+            {
+                Debug.Log("Phòng Elite! Thưởng lớn: 50k & Thẻ bài xịn.");
+                PlayerInventory.Instance.AddCredits(50);
+
+                pool = entireCardPool.FindAll(c => c.rarity == CardRarity.Uncommon || c.rarity == CardRarity.Rare);
+            }
+            else
+            {
+                Debug.Log("Phòng Combat Thường! Thưởng cơ bản: 15k & Thẻ bài cơ bản.");
+                PlayerInventory.Instance.AddCredits(15); 
+
+                pool = entireCardPool.FindAll(c => c.rarity == CardRarity.Common || c.rarity == CardRarity.Uncommon);
+            }
+
+            if (pool.Count < 3)
+            {
+                pool = new List<CardData>(entireCardPool);
+            }
+
+            List<CardData> offeredCards = new();
             for (int i = 0; i < rewardCardSlots.Count; i++)
             {
                 if (pool.Count > 0)
@@ -65,8 +87,6 @@ namespace DoiSinhVien.Core
 
         public void SkipReward()
         {
-            PlayerInventory.Instance.AddCredits(15);
-
             rewardPanel.SetActive(false);
             SceneManager.LoadScene(mapSceneName);
         }
