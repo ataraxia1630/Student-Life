@@ -880,6 +880,7 @@ MonoBehaviour:
   description: {fileID: 8380544704573632160}
   artwork: {fileID: 5331638798545496776}
   wrapper: {fileID: 3877486469589373594}
+  wrapperBackground: {fileID: 7664372018028179801}
 --- !u!61 &6019455014346452597
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -969,5 +970,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 027f26c45d5d1764f9379f5b3c001ca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.UI.CardDragHandler
+  cardVisual: {fileID: 0}
   smartDropYThreshold: 300
   invalidColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.8}

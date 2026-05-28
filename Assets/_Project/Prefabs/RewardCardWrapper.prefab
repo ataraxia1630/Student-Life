@@ -308,6 +308,7 @@ MonoBehaviour:
   manaText: {fileID: 4157717164183848931}
   descriptionText: {fileID: 6175966250017113317}
   artworkImage: {fileID: 8603397355986482236}
+  backgroundImage: {fileID: 44410631277535417}
 --- !u!1 &7304341160754540042
 GameObject:
   m_ObjectHideFlags: 0

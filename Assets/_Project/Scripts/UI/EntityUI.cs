@@ -23,8 +23,6 @@ namespace DoiSinhVien.UI
         public GameObject intentGroup;
         public Image intentIcon;
         public TextMeshProUGUI intentText;
-        public Sprite iconAttack;
-        public Sprite iconDefend;
 
         private void Start()
         {
@@ -64,10 +62,12 @@ namespace DoiSinhVien.UI
                     intentGroup.SetActive(true);
                     intentText.text = _enemy.CurrentIntentValue.ToString();
 
-                    if (_enemy.CurrentAction.intentType == IntentType.Attack)
-                        intentIcon.sprite = iconAttack;
-                    else if (_enemy.CurrentAction.intentType == IntentType.Block) 
-                        intentIcon.sprite = iconDefend;
+                    if (ThemeManager.Instance != null && ThemeManager.Instance.combatVisuals != null)
+                    {
+                        var config = ThemeManager.Instance.combatVisuals.GetIntentVisual(_enemy.CurrentAction.intentType);
+                        if (config.icon != null) intentIcon.sprite = config.icon;
+                        intentIcon.color = config.iconColor;
+                    }
                 }
                 else
                 {

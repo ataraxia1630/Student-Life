@@ -15,6 +15,7 @@ namespace DoiSinhVien.View
         public TMP_Text manaText;
         public TMP_Text descriptionText;
         public Image artworkImage;
+        public Image backgroundImage;
 
         private CardData _cardData;
 
@@ -26,6 +27,15 @@ namespace DoiSinhVien.View
             if (descriptionText != null) descriptionText.text = data.description;
             if (manaText != null) manaText.text = data.manaCost.ToString();
             if (artworkImage != null && data.artwork != null) artworkImage.sprite = data.artwork;
+
+            if (ThemeManager.Instance != null && ThemeManager.Instance.cardVisuals != null && backgroundImage != null)
+            {
+                var config = ThemeManager.Instance.cardVisuals.GetVisualConfig(data.type);
+                if (config.backgroundSprite != null)
+                    backgroundImage.sprite = config.backgroundSprite;
+
+                backgroundImage.color = config.tintColor;
+            }
         }
 
         public void OnPointerClick(PointerEventData eventData)

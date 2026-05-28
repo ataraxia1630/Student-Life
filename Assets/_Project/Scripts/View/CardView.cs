@@ -13,6 +13,7 @@ namespace DoiSinhVien.View
         [SerializeField] private TMP_Text description;
         [SerializeField] private SpriteRenderer artwork;
         [SerializeField] private GameObject wrapper;
+        [SerializeField] private SpriteRenderer wrapperBackground;
 
         public CardInstance LogicCard { get; private set; }
         public void Setup(CardInstance logicCard)
@@ -25,6 +26,15 @@ namespace DoiSinhVien.View
             if (logicCard.Data.artwork != null && artwork != null)
             {
                 artwork.sprite = logicCard.Data.artwork;
+            }
+
+            if (ThemeManager.Instance != null && ThemeManager.Instance.cardVisuals != null && wrapperBackground != null)
+            {
+                var config = ThemeManager.Instance.cardVisuals.GetVisualConfig(logicCard.Data.type);
+                if (config.backgroundSprite != null)
+                    wrapperBackground.sprite = config.backgroundSprite;
+
+                wrapperBackground.color = config.tintColor;
             }
         }
 
