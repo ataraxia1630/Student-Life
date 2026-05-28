@@ -11,6 +11,7 @@ namespace DoiSinhVien.Core
         public EncounterBlueprint pendingEncounter;
 
         public int currentNodeId = 0;
+        public NodeType currentRoomType;
 
 
         private void Awake()
