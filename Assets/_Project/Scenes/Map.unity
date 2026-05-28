@@ -154,6 +154,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b54321108afdf8047b003867521483db, type: 2}
   - {fileID: 11400000, guid: 2bb5bf09c313fea4c8b7006f76c95261, type: 2}
   - {fileID: 11400000, guid: 0ea43558f0b19dc45a8d21b4a2fe511a, type: 2}
+  eliteBlueprints:
+  - {fileID: 11400000, guid: 265fe8b14708ac840a77ab289a42ee81, type: 2}
   bossBlueprint: {fileID: 11400000, guid: 0ea43558f0b19dc45a8d21b4a2fe511a, type: 2}
 --- !u!4 &19623645
 Transform:

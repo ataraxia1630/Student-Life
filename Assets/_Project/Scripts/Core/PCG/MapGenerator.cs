@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using DoiSinhVien.Data;
+using System.Linq;
 
 namespace DoiSinhVien.Core
 {
@@ -12,6 +13,7 @@ namespace DoiSinhVien.Core
 
         [Header("Databases")]
         public List<EncounterBlueprint> easyBlueprints;
+        public List<EncounterBlueprint> eliteBlueprints;
         public EncounterBlueprint bossBlueprint;
 
         public Dictionary<int, MapNodeData> MapGraph { get; private set; } = new Dictionary<int, MapNodeData>();
@@ -39,8 +41,12 @@ namespace DoiSinhVien.Core
                     NodeType type = DetermineNodeType(layer);
                     MapNodeData newNode = new(currentId, layer, type);
 
-                    if (type == NodeType.Combat) newNode.combatBlueprint = GetRandomEasyBlueprint();
-                    else if (type == NodeType.Boss) newNode.combatBlueprint = bossBlueprint;
+                    if (type == NodeType.Combat)
+                        newNode.combatBlueprint = GetRandomBlueprint(layer, easyBlueprints);
+                    else if (type == NodeType.Elite)
+                        newNode.combatBlueprint = GetRandomBlueprint(layer, eliteBlueprints);
+                    else if (type == NodeType.Boss)
+                        newNode.combatBlueprint = bossBlueprint;
 
                     float xPos = (i + 1f) / (nodeCount + 1f) + Random.Range(-0.05f, 0.05f);
                     float yPos = (float)layer / (totalLayers - 1) + Random.Range(-0.02f, 0.02f);
@@ -144,7 +150,16 @@ namespace DoiSinhVien.Core
             if (layer == totalLayers - 1) return NodeType.Boss;
 
             int rand = Random.Range(0, 100);
-            if (rand < 50) return NodeType.Combat;
+            if (layer == 1)
+            {
+                if (rand < 50) return NodeType.Combat;
+                if (rand < 75) return NodeType.Event;
+                if (rand < 90) return NodeType.Shop;
+                return NodeType.Rest;
+            }
+
+            if (rand < 35) return NodeType.Combat;
+            if (rand < 50) return NodeType.Elite;
             if (rand < 70) return NodeType.Event;
             if (rand < 85) return NodeType.Shop;
             return NodeType.Rest;
@@ -154,6 +169,27 @@ namespace DoiSinhVien.Core
         {
             if (easyBlueprints.Count == 0) return null;
             return easyBlueprints[Random.Range(0, easyBlueprints.Count)];
+        }
+
+        private EncounterBlueprint GetRandomBlueprint(int currentLayer, List<EncounterBlueprint> pool)
+        {
+            if (pool == null || pool.Count == 0) return null;
+
+            var validBlueprints = pool.Where(b => b.targetFloor == currentLayer).ToList();
+
+            int fallbackLayer = currentLayer - 1;
+            while (validBlueprints.Count == 0 && fallbackLayer >= 0)
+            {
+                validBlueprints = pool.Where(b => b.targetFloor == fallbackLayer).ToList();
+                fallbackLayer--;
+            }
+
+            if (validBlueprints.Count == 0)
+            {
+                validBlueprints = pool;
+            }
+
+            return validBlueprints[Random.Range(0, validBlueprints.Count)];
         }
     }
 }
