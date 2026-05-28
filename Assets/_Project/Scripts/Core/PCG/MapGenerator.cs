@@ -20,9 +20,19 @@ namespace DoiSinhVien.Core
 
         public List<List<MapNodeData>> MapLayers { get; private set; } = new();
 
+        public static MapGenerator Instance { get; private set; }
+
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         public void GenerateNewMap()
