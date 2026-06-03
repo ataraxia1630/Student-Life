@@ -20,6 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/RestPrototype.unity
     guid: dec1ef083a9d63142b8601fdc8b971c0
+  - enabled: 1
+    path: Assets/_Project/Scenes/Shop.unity
+    guid: 231de7066499088468585b8a82e88320
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_UseUCBPForAssetBundles: 0
