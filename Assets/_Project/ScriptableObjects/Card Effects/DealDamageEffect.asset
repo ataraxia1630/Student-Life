@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2a0ef626e220d146a00f9b848cb3e86, type: 3}
-  m_Name: Basic_Deal_Dmg 1
+  m_Name: DealDamageEffect
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.DealDamageEffect
-  effectName: "G\xE2y S\xE1t Th\u01B0\u01A1ng C\u0103n B\u1EA3n"
-  damageAmount: 2
+  effectName: Deal Damage
+  compareCard: {fileID: 11400000, guid: fca6514c180614e4f9ff8e49f598b744, type: 2}

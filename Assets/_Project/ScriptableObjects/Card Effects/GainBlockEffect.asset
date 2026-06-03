@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06f58fa601e3ee14ba46090cb65f1972, type: 3}
-  m_Name: Block_20
+  m_Name: GainBlockEffect
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.GainBlockEffect
-  effectName: GainBlock20
-  blockAmount: 20
+  effectName: Gain Block
+  comboBonusBlock: 5
+  compareCard: {fileID: 11400000, guid: 2811b2ceed0aad0418c21304a9aeaab0, type: 2}

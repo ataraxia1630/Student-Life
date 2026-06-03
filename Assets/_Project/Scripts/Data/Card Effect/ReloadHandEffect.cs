@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using DoiSinhVien.Core;
-using System.Collections.Generic;
+using DoiSinhVien.Combat;
+
 
 namespace DoiSinhVien.Data
 {
     [CreateAssetMenu(fileName = "ReloadHand", menuName = "Student Life/Effects/Reload Hand")]
     public class ReloadHandEffect : CardEffectData
     {
-        public override void Execute(ITargetable self, ITargetable target)
+        public override void Execute(ITargetable self, ITargetable target, CardInstance cardInstance)
         {
             var deck = CombatManager.Instance.deckManager;
 

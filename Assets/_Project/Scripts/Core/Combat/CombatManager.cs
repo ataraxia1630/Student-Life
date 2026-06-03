@@ -196,7 +196,7 @@ namespace DoiSinhVien.Core
             if (targetEnemy == null) return false;
 
             currentEnergy -= cardToPlay.CurrentCost;
-            ICommand playCmd = new PlayCardCommand(cardToPlay.Data, player, targetEnemy);
+            ICommand playCmd = new PlayCardCommand(cardToPlay.Data, player, targetEnemy, cardToPlay);
             playCmd.Execute();
 
             deckManager.PlayCardFromHand(cardToPlay);

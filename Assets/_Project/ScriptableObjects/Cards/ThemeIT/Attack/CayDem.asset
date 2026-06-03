@@ -14,14 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: IT_CAYDEM
   cardName: "C\xE0y \u0111\xEAm"
+  price: 0
   description: "G\xE2y 18 dmg, l\u01B0\u1EE3t sau -1 energy"
   flavorText: 
+  baseDamage: 18
+  baseBlock: 0
+  baseMagicNumber: 0
   manaCost: 2
   type: 0
   rarity: 0
+  isUnplayable: 0
   isExhaust: 0
   upgradedVersion: {fileID: 0}
-  artwork: {fileID: 21300000, guid: 4ec7927c478aecf4e8eb3f095d6cf0b5, type: 3}
+  artwork: {fileID: 21300000, guid: 118bd6908eed6c84c95beca73b986fe4, type: 3}
   effects:
-  - {fileID: 11400000, guid: e30e1f5a2e83e3d418d4eee560ae0948, type: 2}
+  - {fileID: 11400000, guid: 8bc4c318552ce574a8be33f8741317c1, type: 2}
   - {fileID: 11400000, guid: ebd6eaac187d301459e3217a1f5944a8, type: 2}
+  targetType: 2

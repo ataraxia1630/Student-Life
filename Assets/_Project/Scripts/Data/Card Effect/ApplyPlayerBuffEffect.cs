@@ -1,35 +1,25 @@
 ﻿using UnityEngine;
 using DoiSinhVien.Core;
+using DoiSinhVien.Combat; 
 
 namespace DoiSinhVien.Data
 {
-    public enum BuffType { BonusDamage, BonusDraw, DoubleNextCard }
-
-    [CreateAssetMenu(fileName = "ApplyBuff_", menuName = "Student Life/Effects/Apply Buff")]
+    [CreateAssetMenu(fileName = "Effect_ApplyStatus", menuName = "Student Life/Effects/Apply Status")]
     public class ApplyPlayerBuffEffect : CardEffectData
     {
-        public BuffType buffType;
-        public int value;
+        public StatusData statusToApply;
 
-        public override void Execute(ITargetable self, ITargetable target)
+        public override void Execute(ITargetable self, ITargetable target, CardInstance cardInstance)
         {
-            if (self is PlayerCharacter player)
+            if (self is PlayerCharacter player && statusToApply != null && cardInstance != null)
             {
-                switch (buffType)
-                {
-                    case BuffType.BonusDamage:
-                        player.bonusAttackDamage += value;
-                        Debug.Log($"[Power] 10x Developer kích hoạt! +{value} DMG cho mọi thẻ Attack.");
-                        break;
-                    case BuffType.BonusDraw:
-                        player.bonusDrawPerTurn += value;
-                        Debug.Log($"[Power] Agile Mindset kích hoạt! Rút thêm {value} bài mỗi đầu lượt.");
-                        break;
-                    case BuffType.DoubleNextCard:
-                        player.isNextCardDoubled = true;
-                        Debug.Log($"[Skill] Pair Programming! Lá bài tiếp theo sẽ x2 hiệu ứng.");
-                        break;
-                }
+                int stackAmount = cardInstance.CurrentMagicNumber;
+
+                if (stackAmount <= 0) stackAmount = 1;
+
+                player.AddStatus(statusToApply, stackAmount);
+
+                Debug.Log($"[Effect] Đã áp dụng {stackAmount} stack của {statusToApply.statusName} cho người chơi!");
             }
         }
     }

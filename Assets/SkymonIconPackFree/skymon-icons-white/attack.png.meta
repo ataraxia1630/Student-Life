@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: b6dff2a3895b38441ae4e419a1f153b0
-AssetOrigin:
-  serializedVersion: 1
-  productId: 282424
-  packageName: Skymon Icon Pack Free
-  packageVersion: 1.2
-  assetPath: Assets/SkymonIconPackFree/skymon-icons-white/fairy-wand.png
-  uploadId: 744493
+guid: 3d6559860c0f87b418a232a70227cf23
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

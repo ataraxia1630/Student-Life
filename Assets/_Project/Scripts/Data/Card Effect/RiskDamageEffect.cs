@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DoiSinhVien.Core;
+using DoiSinhVien.Combat;
 
 namespace DoiSinhVien.Data
 {
@@ -10,7 +11,7 @@ namespace DoiSinhVien.Data
         [Range(0f, 1f)] public float riskChance = 0.3f; 
         public int selfDamage;
 
-        public override void Execute(ITargetable self, ITargetable target)
+        public override void Execute(ITargetable self, ITargetable target, CardInstance cardInstance)
         {
             target.TakeDamage(damageToEnemy);
             Debug.Log($"[Effect] Gây {damageToEnemy} DMG lên quái.");

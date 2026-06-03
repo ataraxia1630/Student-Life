@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DoiSinhVien.Core;
+using DoiSinhVien.Combat;
 
 namespace DoiSinhVien.Data
 {
@@ -8,6 +9,6 @@ namespace DoiSinhVien.Data
         [Header("Effect Info")]
         public string effectName;
 
-        public abstract void Execute(ITargetable self, ITargetable target);
+        public abstract void Execute(ITargetable self, ITargetable target, CardInstance cardInstance);
     }
 }

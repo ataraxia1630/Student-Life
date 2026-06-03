@@ -14,14 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: IT_COFFEE
   cardName: "Coffe Th\u1EE9 Ba"
+  price: 0
   description: "T\u1EA1o 3 block. +1 energy."
   flavorText: 
-  manaCost: 0
+  baseDamage: 0
+  baseBlock: 3
+  baseMagicNumber: 0
+  manaCost: 1
   type: 1
   rarity: 0
+  isUnplayable: 0
   isExhaust: 0
   upgradedVersion: {fileID: 0}
-  artwork: {fileID: 21300000, guid: 4ec7927c478aecf4e8eb3f095d6cf0b5, type: 3}
+  artwork: {fileID: 21300000, guid: 1e25b4d3914dba74d99d9ca369c6614a, type: 3}
   effects:
-  - {fileID: 11400000, guid: cd06175381a70b24ea5f77f33d6d8d84, type: 2}
+  - {fileID: 11400000, guid: 77a8ca98922d80a42a413c071cd86834, type: 2}
   - {fileID: 11400000, guid: d738a2166c34e7f4bbfa9005f7887a6c, type: 2}
+  targetType: 2
