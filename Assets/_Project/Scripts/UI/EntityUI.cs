@@ -33,7 +33,8 @@ namespace DoiSinhVien.UI
 
                 if (_target != null)
                 {
-                    hpSlider.maxValue = _target.CurrentHealth; 
+                    if (_target is PlayerCharacter) hpSlider.maxValue = PlayerInventory.Instance.maxHealth;
+                    else hpSlider.maxValue = _target.CurrentHealth; 
                 }
             }
         }

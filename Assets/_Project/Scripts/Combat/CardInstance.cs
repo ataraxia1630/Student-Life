@@ -36,9 +36,9 @@ namespace DoiSinhVien.Combat
                 {
                     int stack = player.ActiveStatuses[status];
 
-                    CurrentCost = status.ModifyCost(this, CurrentCost, stack);
-                    CurrentDamage = status.ModifyDamage(this, CurrentDamage, stack);
-                    CurrentBlock = status.ModifyBlock(this, CurrentBlock, stack);
+                    CurrentCost = status.ModifyCost(player, this, CurrentCost, stack);
+                    CurrentDamage = status.ModifyDamage(player, this, CurrentDamage, stack);
+                    CurrentBlock = status.ModifyBlock(player, this, CurrentBlock, stack);
                 }
             }
 

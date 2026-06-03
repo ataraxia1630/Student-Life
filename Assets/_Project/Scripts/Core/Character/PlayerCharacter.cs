@@ -8,7 +8,7 @@ namespace DoiSinhVien.Core
 {
     public class PlayerCharacter : MonoBehaviour, ITargetable
     {
-        public int MaxHealth { get; private set; }
+        public int MaxHealth => PlayerInventory.Instance.maxHealth;
         public int CurrentHealth { get; private set; }
         public int CurrentBlock { get; private set; }
 
@@ -19,7 +19,7 @@ namespace DoiSinhVien.Core
 
         public void Initialize()
         {
-            CurrentHealth = MaxHealth;
+            CurrentHealth = PlayerInventory.Instance.currentHealth;
             CurrentBlock = 0;
         }
 
@@ -78,6 +78,30 @@ namespace DoiSinhVien.Core
             SortedStatuses = SortedStatuses.OrderBy(s => s.priority).ToList();
 
             OnStatusChanged?.Invoke();
+        }
+
+        public void TriggerTurnStartHooks()
+        {
+            var statuses = SortedStatuses.ToList();
+            foreach (var status in statuses)
+            {
+                if (ActiveStatuses.ContainsKey(status))
+                {
+                    status.OnTurnStart(this, ActiveStatuses[status]);
+                }
+            }
+        }
+
+        public void TriggerTurnEndHooks()
+        {
+            var statuses = SortedStatuses.ToList();
+            foreach (var status in statuses)
+            {
+                if (ActiveStatuses.ContainsKey(status))
+                {
+                    status.OnTurnEnd(this, ActiveStatuses[status]);
+                }
+            }
         }
     }
 }

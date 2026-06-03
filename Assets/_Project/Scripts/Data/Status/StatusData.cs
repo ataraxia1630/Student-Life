@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DoiSinhVien.Combat;
+using DoiSinhVien.Core;
 
 namespace DoiSinhVien.Data
 {
@@ -16,20 +17,24 @@ namespace DoiSinhVien.Data
         [Tooltip("Thứ tự tính toán: Số nhỏ tính trước (Cộng/Trừ), Số lớn tính sau (Nhân/Chia)")]
         public int priority = 0;
 
-        public virtual int ModifyDamage(CardInstance card, int currentDamage, int stack)
+        public virtual int ModifyDamage(PlayerCharacter player, CardInstance card, int currentDamage, int stack)
         {
             return currentDamage;
         }
 
-        public virtual int ModifyCost(CardInstance card, int currentCost, int stack)
+        public virtual int ModifyCost(PlayerCharacter player, CardInstance card, int currentCost, int stack)
         {
             return currentCost;
         }
 
-        public virtual int ModifyBlock(CardInstance card, int currentBlock, int stack)
+        public virtual int ModifyBlock(PlayerCharacter player, CardInstance card, int currentBlock, int stack)
         {
             return currentBlock;
         }
+
+        public virtual void OnTurnStart(PlayerCharacter player, int stack) { }
+
+        public virtual void OnTurnEnd(PlayerCharacter player, int stack) { }
 
     }
 }
