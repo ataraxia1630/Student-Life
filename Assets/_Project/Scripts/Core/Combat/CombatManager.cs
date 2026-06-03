@@ -274,5 +274,11 @@ namespace DoiSinhVien.Core
                 ChangeState(CombatState.Player_Turn_Active);
             }
         }
+
+        public void ConsumeEnergy(int amount)
+        {
+            currentEnergy = Mathf.Max(0, currentEnergy - amount);
+            Debug.Log($"[CombatManager] Đã tiêu thụ {amount} Energy. Energy còn lại: {currentEnergy}");
+        }
     }
 }

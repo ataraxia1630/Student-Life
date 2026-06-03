@@ -19,7 +19,7 @@ MonoBehaviour:
   flavorText: 
   baseDamage: 18
   baseBlock: 0
-  baseMagicNumber: 0
+  baseMagicNumber: 1
   manaCost: 2
   type: 0
   rarity: 0
@@ -29,5 +29,5 @@ MonoBehaviour:
   artwork: {fileID: 21300000, guid: 118bd6908eed6c84c95beca73b986fe4, type: 3}
   effects:
   - {fileID: 11400000, guid: 8bc4c318552ce574a8be33f8741317c1, type: 2}
-  - {fileID: 11400000, guid: ebd6eaac187d301459e3217a1f5944a8, type: 2}
+  - {fileID: 11400000, guid: 0c804118a990b054c9a5b1f406342690, type: 2}
   targetType: 2

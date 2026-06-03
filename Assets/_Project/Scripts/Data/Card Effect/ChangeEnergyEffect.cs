@@ -13,11 +13,7 @@ namespace DoiSinhVien.Data
         {
             if (CombatManager.Instance != null)
             {
-                CombatManager.Instance.currentEnergy = Mathf.Clamp(
-                    CombatManager.Instance.currentEnergy + energyAmount,
-                    0,
-                    CombatManager.Instance.maxEnergy
-                );
+                CombatManager.Instance.currentEnergy += energyAmount;
                 Debug.Log($"[Effect] Năng lượng thay đổi {energyAmount}. Hiện tại: {CombatManager.Instance.currentEnergy}");
             }
         }
