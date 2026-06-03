@@ -1,4 +1,5 @@
 ﻿using DoiSinhVien.Core;
+using DoiSinhVien.Visual;
 using UnityEngine;
 
 namespace DoiSinhVien.Data
@@ -13,6 +14,11 @@ namespace DoiSinhVien.Data
             if (self is EnemyController enemy)
             {
                 finalDamage += enemy.CurrentStrength;
+            }
+
+            if (target is MonoBehaviour targetObj)
+            {
+                GameEvents.OnPlayVFX?.Invoke(targetObj.transform, VFXType.Slash);
             }
             Debug.Log($"[Quái] Tung chiêu {actionName}!");
             target.TakeDamage(finalDamage);

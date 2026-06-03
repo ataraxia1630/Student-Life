@@ -1,4 +1,5 @@
 ﻿using DoiSinhVien.Core;
+using DoiSinhVien.Visual;
 using UnityEngine;
 
 namespace DoiSinhVien.Data
@@ -8,6 +9,10 @@ namespace DoiSinhVien.Data
     {
         public override void Execute(ITargetable self, ITargetable target, int value)
         {
+            if (self is MonoBehaviour targetObj)
+            {
+                GameEvents.OnPlayVFX?.Invoke(targetObj.transform, VFXType.Shield);
+            }
             Debug.Log($"[Quái] Tung chiêu {actionName}!");
             self.GainBlock(value); 
         }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DoiSinhVien.Core;
+using DoiSinhVien.Visual;
 
 namespace DoiSinhVien.Data
 {
@@ -10,6 +11,10 @@ namespace DoiSinhVien.Data
 
         public override void Execute(ITargetable self, ITargetable target)
         {
+            if (self is MonoBehaviour targetObj)
+            {
+                GameEvents.OnPlayVFX?.Invoke(targetObj.transform, VFXType.Shield);
+            }
             self.GainBlock(blockAmount);
         }
     }

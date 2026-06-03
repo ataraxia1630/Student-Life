@@ -1,5 +1,7 @@
 ﻿using System;
+using UnityEngine;
 using DoiSinhVien.Combat; 
+using DoiSinhVien.Visual;
 
 namespace DoiSinhVien.Core
 {
@@ -15,5 +17,9 @@ namespace DoiSinhVien.Core
         public static Action<CardInstance> OnCardPlayed;
         public static Action<CardInstance> OnCardDrawn;
         public static Action<CardInstance> OnCardDiscarded;
+
+        public static Action<Transform, int> OnEntityDamaged;
+        public static Action<Transform, int> OnEntityGainedBlock;
+        public static Action<Transform, VFXType> OnPlayVFX;
     }
 }
