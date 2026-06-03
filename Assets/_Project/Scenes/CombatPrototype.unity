@@ -336,6 +336,50 @@ MonoBehaviour:
   drawPileText: {fileID: 900361617}
   endTurnButton: {fileID: 1063557031}
   discardPileText: {fileID: 25020089}
+--- !u!1 &287490683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 287490684}
+  - component: {fileID: 287490685}
+  m_Layer: 5
+  m_Name: Notification
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &287490684
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287490683}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1325355215}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &287490685
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287490683}
+  m_CullTransparentMesh: 1
 --- !u!114 &369497004 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4095343776624694788, guid: a27493482dc86704ea8e8470e1984af7, type: 3}
@@ -400,8 +444,6 @@ MonoBehaviour:
   intentGroup: {fileID: 0}
   intentIcon: {fileID: 0}
   intentText: {fileID: 0}
-  iconAttack: {fileID: 0}
-  iconDefend: {fileID: 0}
 --- !u!1 &623638075
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,6 +718,52 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2908292392211311261, guid: 6c352389e4c871d4993ee8516ec58511, type: 3}
   m_PrefabInstance: {fileID: 4272281781878796905}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &871635716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 871635717}
+  - component: {fileID: 871635718}
+  m_Layer: 0
+  m_Name: NotificationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &871635717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871635716}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1581023513}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &871635718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871635716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609cf80eb5ca90146941921431832ba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Visual.NotificationManager
+  notificationPrefab: {fileID: 5118653570034849491, guid: 771b3b07e85ac6d47bd426f70e30f68b, type: 3}
+  notificationContainer: {fileID: 287490684}
 --- !u!114 &900361617 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8040183246960229680, guid: 6c352389e4c871d4993ee8516ec58511, type: 3}
@@ -1476,6 +1564,7 @@ RectTransform:
   m_Children:
   - {fileID: 115708770}
   - {fileID: 856254066}
+  - {fileID: 287490684}
   m_Father: {fileID: 104684199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1775,6 +1864,7 @@ Transform:
   - {fileID: 854304554}
   - {fileID: 1044674029}
   - {fileID: 1972734638}
+  - {fileID: 871635717}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1795700397 stripped

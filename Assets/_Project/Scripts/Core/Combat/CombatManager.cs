@@ -5,6 +5,7 @@ using DoiSinhVien.Combat;
 using DoiSinhVien.View;
 using System.Collections;
 using DoiSinhVien.UI;
+using DoiSinhVien.Visual;
 
 namespace DoiSinhVien.Core
 {
@@ -173,13 +174,14 @@ namespace DoiSinhVien.Core
             if (cardToPlay.Data.isUnplayable)
             {
                 Debug.LogWarning("!!! Đây là bài Rác, không thể đánh ra !!!");
-                // có thể gọi Animation lắc nhẹ lá bài kèm âm thanh "bíp" báo lỗi
+                NotificationManager.Instance.ShowMessage("!!! Đây là bài Rác, không thể đánh ra !!!", Color.red);
                 return false;
             }
 
             if (currentEnergy < cardToPlay.CurrentCost)
             {
                 Debug.LogWarning("!!! Thiếu Energy, không thể đánh lá này !!!");
+                NotificationManager.Instance.ShowMessage("!!! Thiếu Energy, không thể đánh lá này !!!", Color.yellow);
                 return false;
             }
 
