@@ -14,13 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: IT_VPN
   cardName: "VPN Tr\u01B0\u1EDDng"
-  description: "Block 5. N\u1EBFu \u0111\xE1nh sau l\xE1 Defend, +5 block n\u1EEFa."
+  price: 0
+  description: "Block 5. N\u1EBFu l\xE1 sau l\xE0 Defend th\xEC \u0111\u01B0\u1EE3c
+    +5 block n\u1EEFa."
   flavorText: 
-  manaCost: 0
+  baseDamage: 0
+  baseBlock: 5
+  baseMagicNumber: 0
+  manaCost: 1
   type: 1
   rarity: 0
+  isUnplayable: 0
   isExhaust: 0
   upgradedVersion: {fileID: 0}
-  artwork: {fileID: 21300000, guid: 4ec7927c478aecf4e8eb3f095d6cf0b5, type: 3}
+  artwork: {fileID: 21300000, guid: aba2303e2865bf84bb09cdc78df5b1f5, type: 3}
   effects:
-  - {fileID: 11400000, guid: c597c8aed48d3f34ca697fe0b4203390, type: 2}
+  - {fileID: 11400000, guid: 77a8ca98922d80a42a413c071cd86834, type: 2}
+  targetType: 2

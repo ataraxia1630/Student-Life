@@ -66,6 +66,8 @@ namespace DoiSinhVien.Core
                 int remainingDamage = amount - CurrentBlock;
                 CurrentBlock = 0;
                 CurrentHealth -= remainingDamage;
+
+                GameEvents.OnEntityDamaged?.Invoke(this.transform, remainingDamage);
                 Debug.Log($"[Quái - {data.enemyName}] Vỡ Block! Nhận {remainingDamage} sát thương. Máu còn: {CurrentHealth}");
 
                 if (CurrentHealth <= 0)
@@ -79,6 +81,8 @@ namespace DoiSinhVien.Core
         public void GainBlock(int amount)
         {
             CurrentBlock += amount;
+
+            GameEvents.OnEntityGainedBlock?.Invoke(this.transform, amount);
             Debug.Log($"[Quái - {data.enemyName}] Nhận {amount} Giáp.");
         }
 

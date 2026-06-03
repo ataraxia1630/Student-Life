@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa3d86ec5fa1d343aeec7ee580dc77e, type: 3}
+  m_Name: LeetCode Hard
+  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
+  id: Leetcode
+  cardName: Hard LeetCode
+  price: 0
+  description: "G\xE2y 12 DMG. "
+  flavorText: 
+  baseDamage: 12
+  baseBlock: 0
+  baseMagicNumber: 0
+  manaCost: 2
+  type: 0
+  rarity: 2
+  isUnplayable: 0
+  isExhaust: 0
+  upgradedVersion: {fileID: 0}
+  artwork: {fileID: 21300000, guid: c31f25a265f7eb4488e60fb139c60279, type: 3}
+  effects:
+  - {fileID: 11400000, guid: 8bc4c318552ce574a8be33f8741317c1, type: 2}
+  targetType: 2

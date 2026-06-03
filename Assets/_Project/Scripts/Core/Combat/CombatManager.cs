@@ -5,6 +5,8 @@ using DoiSinhVien.Combat;
 using DoiSinhVien.View;
 using System.Collections;
 using DoiSinhVien.UI;
+using DoiSinhVien.Visual;
+using System.Linq;
 
 namespace DoiSinhVien.Core
 {
@@ -32,6 +34,10 @@ namespace DoiSinhVien.Core
         public CombatState CurrentState { get; private set; }
 
         public int pendingDiscardCount = 0;
+
+        private CardType lastCardType;
+        private int consecutiveCardCount = 0;
+        public StatusData nextTurnEnergyStatus;
 
         private void Awake()
         {
@@ -97,11 +103,19 @@ namespace DoiSinhVien.Core
                 yield return new WaitUntil(() => !EventPopupUI.Instance.IsOpen);
             }
 
+            yield return StartCoroutine(StartHookCoroutine());
+
             yield return StartCoroutine(EnemyIntentRoutine());
 
             yield return StartCoroutine(DrawCardsRoutine(5));
 
             ChangeState(CombatState.Player_Turn_Active);
+        }
+
+        private IEnumerator StartHookCoroutine()
+        {
+            player.TriggerTurnStartHooks();
+            yield return new WaitForSeconds(0.2f);
         }
 
         private IEnumerator DrawCardsRoutine(int amount)
@@ -152,6 +166,7 @@ namespace DoiSinhVien.Core
             deckManager.DiscardHand();
             // HandView tự động xóa bài thông qua Event OnCardDiscarded lúc DiscardHand chạy!
             player.ResetBlock();
+            player.TriggerTurnEndHooks();
             yield return new WaitForSeconds(0.5f);
             currentTurn++;
             ChangeState(CombatState.Player_Turn_Start);
@@ -173,13 +188,21 @@ namespace DoiSinhVien.Core
             if (cardToPlay.Data.isUnplayable)
             {
                 Debug.LogWarning("!!! Đây là bài Rác, không thể đánh ra !!!");
-                // có thể gọi Animation lắc nhẹ lá bài kèm âm thanh "bíp" báo lỗi
+                NotificationManager.Instance.ShowMessage("!!! Đây là bài Rác, không thể đánh ra !!!", Color.red);
                 return false;
             }
 
             if (currentEnergy < cardToPlay.CurrentCost)
             {
                 Debug.LogWarning("!!! Thiếu Energy, không thể đánh lá này !!!");
+                NotificationManager.Instance.ShowMessage("!!! Thiếu Energy, không thể đánh lá này !!!", Color.yellow);
+                return false;
+            }
+
+            bool hasProcrastination = player.ActiveStatuses.Keys.Any(s => s is ProcrastinationStatus);
+            if (hasProcrastination && deckManager.hand.Count == 1)
+            {
+                NotificationManager.Instance.ShowMessage("Bệnh Trì Hoãn: Không thể đánh lá cuối cùng!", Color.red);
                 return false;
             }
 
@@ -194,11 +217,23 @@ namespace DoiSinhVien.Core
             if (targetEnemy == null) return false;
 
             currentEnergy -= cardToPlay.CurrentCost;
-            ICommand playCmd = new PlayCardCommand(cardToPlay.Data, player, targetEnemy);
+            ICommand playCmd = new PlayCardCommand(cardToPlay.Data, player, targetEnemy, cardToPlay);
             playCmd.Execute();
 
             deckManager.PlayCardFromHand(cardToPlay);
             GameEvents.OnCardPlayed?.Invoke(cardToPlay);
+
+            // Flow state
+            if (cardToPlay.Data.type == lastCardType) consecutiveCardCount++;
+            else { consecutiveCardCount = 1; lastCardType = cardToPlay.Data.type; }
+
+            if (consecutiveCardCount == 3)
+            {
+                player.AddStatus(nextTurnEnergyStatus, 1);
+                NotificationManager.Instance.ShowMessage("FLOW STATE: +1 Energy hiệp sau!", Color.yellow);
+                consecutiveCardCount = 0; 
+            }
+            
 
             bool isAllEnemiesDead = activeEnemies.TrueForAll(e => e.CurrentHealth <= 0);
             if (isAllEnemiesDead)
@@ -238,6 +273,12 @@ namespace DoiSinhVien.Core
             {
                 ChangeState(CombatState.Player_Turn_Active);
             }
+        }
+
+        public void ConsumeEnergy(int amount)
+        {
+            currentEnergy = Mathf.Max(0, currentEnergy - amount);
+            Debug.Log($"[CombatManager] Đã tiêu thụ {amount} Energy. Energy còn lại: {currentEnergy}");
         }
     }
 }

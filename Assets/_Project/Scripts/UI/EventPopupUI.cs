@@ -57,7 +57,7 @@ namespace DoiSinhVien.UI
 
             foreach (var effect in selectedChoice.consequences)
             {
-                effect.Execute(player, player);
+                effect.Execute(player, player, null);
             }
 
             Debug.Log($"[Event] Đã chọn: {selectedChoice.choiceText}");

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DoiSinhVien.Core;
+using DoiSinhVien.Combat;
 
 namespace DoiSinhVien.Data
 {
@@ -8,15 +9,11 @@ namespace DoiSinhVien.Data
     {
         public int energyAmount;
 
-        public override void Execute(ITargetable self, ITargetable target)
+        public override void Execute(ITargetable self, ITargetable target, CardInstance cardInstance)
         {
             if (CombatManager.Instance != null)
             {
-                CombatManager.Instance.currentEnergy = Mathf.Clamp(
-                    CombatManager.Instance.currentEnergy + energyAmount,
-                    0,
-                    CombatManager.Instance.maxEnergy
-                );
+                CombatManager.Instance.currentEnergy += energyAmount;
                 Debug.Log($"[Effect] Năng lượng thay đổi {energyAmount}. Hiện tại: {CombatManager.Instance.currentEnergy}");
             }
         }

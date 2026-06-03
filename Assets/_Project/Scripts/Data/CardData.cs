@@ -23,7 +23,12 @@ namespace DoiSinhVien.Data
         public string description; 
 
         [TextArea(2, 3)]
-        public string flavorText; 
+        public string flavorText;
+
+        [Header("Card Base Stats")]
+        public int baseDamage; 
+        public int baseBlock;
+        public int baseMagicNumber; 
 
         [Header("Stats")]
         public int manaCost; 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DoiSinhVien.Core;
+using DoiSinhVien.Combat;
 
 namespace DoiSinhVien.Data
 {
@@ -8,7 +9,7 @@ namespace DoiSinhVien.Data
     {
         public int discardAmount = 1;
 
-        public override void Execute(ITargetable self, ITargetable target)
+        public override void Execute(ITargetable self, ITargetable target, CardInstance cardInstance)
         {
             if (CombatManager.Instance != null)
             {
