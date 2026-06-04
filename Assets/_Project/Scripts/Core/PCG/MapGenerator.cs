@@ -163,14 +163,14 @@ namespace DoiSinhVien.Core
             if (layer == 1)
             {
                 if (rand < 50) return NodeType.Combat;
-                if (rand < 75) return NodeType.Event;
+                //if (rand < 75) return NodeType.Event;
                 if (rand < 90) return NodeType.Shop;
                 return NodeType.Rest;
             }
 
-            if (rand < 35) return NodeType.Combat;
-            if (rand < 50) return NodeType.Elite;
-            if (rand < 70) return NodeType.Event;
+            if (rand < 45) return NodeType.Combat;
+            if (rand < 70) return NodeType.Elite;
+            //if (rand < 70) return NodeType.Event;
             if (rand < 85) return NodeType.Shop;
             return NodeType.Rest;
         }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.EnemyData
   enemyId: E_B_T
   enemyName: Bad Teamate
-  enemyPrefab: {fileID: 2279909546300788952, guid: 7157107e144118644b6a06db42b6a998, type: 3}
+  enemyPrefab: {fileID: 5863158984536497681, guid: 106d680ae67334c42bd21bbfaea9b5c5, type: 3}
   maxHealth: 20
   actionPool:
   - {fileID: 11400000, guid: d2cb3152d7a704f418613795674af6ab, type: 2}

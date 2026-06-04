@@ -856,7 +856,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -99
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 9efd2fcdc9a48584c9ea74cb876b3a68, type: 3}
+  m_Sprite: {fileID: -8821267456435747382, guid: 7e9df625bc08f4b4e95cd486403f382c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1862,6 +1862,7 @@ MonoBehaviour:
   handView: {fileID: 943421981}
   currentTurn: 1
   pendingDiscardCount: 0
+  nextTurnEnergyStatus: {fileID: 0}
 --- !u!114 &1472055562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2003,7 +2004,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d6cd67fd2b381241a53a020a5111e13, type: 2}
   - {fileID: 11400000, guid: 6b762c24117abc845a8de1d72907d779, type: 2}
   - {fileID: 11400000, guid: 5ad0af1a21303914aadadf20e0692da4, type: 2}
-  - {fileID: 11400000, guid: 705bca6e3f0d4f74abd4d91224f80591, type: 2}
   mapSceneName: Map
 --- !u!1 &2123491704
 GameObject:
@@ -2150,6 +2150,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1438520442}
     m_Modifications:
+    - target: {fileID: 758235113661199466, guid: a369260089f202444b6142b1c55eb1b2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525268344927860392, guid: a369260089f202444b6142b1c55eb1b2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6979301467697674579, guid: 0052080b42450fa4d9c93cd1537df2fa, type: 3}
     - target: {fileID: 7588056420081908262, guid: a369260089f202444b6142b1c55eb1b2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2194,7 +2202,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7453808451481445483, guid: a369260089f202444b6142b1c55eb1b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8585476929927857071, guid: a369260089f202444b6142b1c55eb1b2, type: 3}
@@ -2672,6 +2681,10 @@ PrefabInstance:
     - target: {fileID: 5638841465457439692, guid: 55fd33f9f4b710d4ab3ccd7c9d9fc250, type: 3}
       propertyPath: m_Name
       value: Top
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246103505576561756, guid: 55fd33f9f4b710d4ab3ccd7c9d9fc250, type: 3}
+      propertyPath: m_margin.x
+      value: -98.9189
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
