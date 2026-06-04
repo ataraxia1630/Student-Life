@@ -73,9 +73,34 @@ namespace DoiSinhVien.Core
                 if (CurrentHealth <= 0)
                 {
                     Debug.Log($"[Quái - {data.enemyName}] Đã bị fix (Bay màu)!");
+                    Die();
                     // Gọi event quái chết để cập nhật list activeEnemies
                 }
             }
+        }
+
+        private void Die()
+        {
+            CurrentHealth = 0;
+            CurrentBlock = 0;
+            //ActiveStatuses?.Clear();
+
+            Debug.Log($"[Quái - {data.enemyName}] Đã biến thành MỘ!");
+
+            Collider2D col = GetComponent<Collider2D>();
+            if (col != null) col.enabled = false;
+
+            SpriteRenderer sprite = GetComponentInChildren<SpriteRenderer>();
+            if (sprite != null)
+            {
+                sprite.color = Color.gray;
+            }
+
+            Canvas uiCanvas = GetComponentInChildren<Canvas>();
+            if (uiCanvas != null) uiCanvas.gameObject.SetActive(false);
+
+            // Kêu UI vẽ lại Icon Status (để xóa hết icon buff cũ)
+            //OnStatusChanged?.Invoke();
         }
 
         public void GainBlock(int amount)

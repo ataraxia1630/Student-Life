@@ -211,6 +211,12 @@ namespace DoiSinhVien.Core
             if (explicitTarget != null)
             {
                 targetEnemy = explicitTarget.GetComponent<EnemyController>();
+
+                if (targetEnemy != null && targetEnemy.CurrentHealth <= 0)
+                {
+                    NotificationManager.Instance.ShowMessage("Mục tiêu này đã bay màu!", Color.gray);
+                    return false; 
+                }
             }
             else targetEnemy = activeEnemies.Find(e => e.CurrentHealth > 0);
 
