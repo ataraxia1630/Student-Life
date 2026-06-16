@@ -7,6 +7,7 @@ using System.Collections;
 using DoiSinhVien.UI;
 using DoiSinhVien.Visual;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 namespace DoiSinhVien.Core
 {
@@ -105,6 +106,7 @@ namespace DoiSinhVien.Core
                     break;
                 case CombatState.Combat_Lose:
                     GameEvents.OnCombatLose?.Invoke();
+                    SceneManager.LoadScene("GameOver");
                     break;
             }
         }
