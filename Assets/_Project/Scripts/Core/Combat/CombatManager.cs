@@ -32,12 +32,15 @@ namespace DoiSinhVien.Core
         public int currentTurn = 1;
 
         public CombatState CurrentState { get; private set; }
+        private bool isSkipTurn = false;
 
         public int pendingDiscardCount = 0;
 
         private CardType lastCardType;
         private int consecutiveCardCount = 0;
         public StatusData nextTurnEnergyStatus;
+        private int extraNextEnergy = 0;
+
 
         private void Awake()
         {
@@ -71,15 +74,25 @@ namespace DoiSinhVien.Core
                     break;
 
                 case CombatState.Player_Turn_Start:
-                    currentEnergy = maxEnergy;
+                    currentEnergy = maxEnergy + extraNextEnergy;
                     StartCoroutine(TurnStartSequence());
                     break;
 
                 case CombatState.Player_Turn_Active:
-                    Debug.Log("=> TỚI LƯỢT BẠN! Hãy đánh bài hoặc bấm nút End Turn.");
+                    if (isSkipTurn)
+                    { 
+                        NotificationManager.Instance.ShowMessage("Lượt này bị bỏ qua!", Color.yellow);
+                        ChangeState(CombatState.Enemy_Turn_Active);
+                    } 
+                    else
+                    {
+                        Debug.Log("=> TỚI LƯỢT BẠN! Hãy đánh bài hoặc bấm nút End Turn.");
+                        NotificationManager.Instance.ShowMessage("TỚI LƯỢT BẠN! Hãy đánh bài hoặc bấm nút End Turn.", Color.green);
+                    }    
                     break;
 
                 case CombatState.Enemy_Turn_Active:
+                    NotificationManager.Instance.ShowMessage("Lượt quái! Hãy chuẩn bị tinh thần!", Color.orange);
                     StartCoroutine(EnemyActionRoutine()); 
                     break;
 
@@ -90,7 +103,15 @@ namespace DoiSinhVien.Core
                     GameEvents.OnCombatWin?.Invoke();
                     StartCoroutine(HandleVictoryRoutine());
                     break;
+                case CombatState.Combat_Lose:
+                    GameEvents.OnCombatLose?.Invoke();
+                    break;
             }
+        }
+
+        public void GainExtraNextEnergy(int amount)
+        {
+            extraNextEnergy += amount;
         }
 
         private IEnumerator TurnStartSequence()
@@ -169,6 +190,8 @@ namespace DoiSinhVien.Core
             player.TriggerTurnEndHooks();
             yield return new WaitForSeconds(0.5f);
             currentTurn++;
+            extraNextEnergy = 0;
+            isSkipTurn = false;
             ChangeState(CombatState.Player_Turn_Start);
         }
 
@@ -182,6 +205,12 @@ namespace DoiSinhVien.Core
         public bool TryPlayCard(CardView cardView, GameObject explicitTarget = null)
         {
             if (CurrentState != CombatState.Player_Turn_Active) return false;
+
+            if (EventPopupUI.Instance != null && EventPopupUI.Instance.IsOpen)
+            {
+                NotificationManager.Instance.ShowMessage("Hãy giải quyết Sự kiện trước!", Color.red);
+                return false;
+            }
 
             CardInstance cardToPlay = cardView.LogicCard;
 
@@ -266,12 +295,14 @@ namespace DoiSinhVien.Core
             if (deckManager.hand.Count == 0) return;
 
             pendingDiscardCount = Mathf.Min(amount, deckManager.hand.Count);
+            NotificationManager.Instance.ShowMessage($"Hãy bỏ {pendingDiscardCount} lá trên tay!", Color.yellow);
             ChangeState(CombatState.Player_Discarding);
         }
 
         public void DiscardSelectedCard(CardView cardView)
         {
             deckManager.DiscardSpecificCardFromHand(cardView.LogicCard);
+            NotificationManager.Instance.ShowMessage($"Đã bỏ lá: {cardView.LogicCard.Data.cardName}", Color.green);
 
             pendingDiscardCount--;
 
@@ -285,6 +316,12 @@ namespace DoiSinhVien.Core
         {
             currentEnergy = Mathf.Max(0, currentEnergy - amount);
             Debug.Log($"[CombatManager] Đã tiêu thụ {amount} Energy. Energy còn lại: {currentEnergy}");
+        }
+
+        public void SkipNextTurn()
+        {
+            isSkipTurn = true;
+            Debug.Log("Lượt tiếp theo sẽ bị bỏ qua!");
         }
     }
 }

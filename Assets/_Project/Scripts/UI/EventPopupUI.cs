@@ -55,9 +55,9 @@ namespace DoiSinhVien.UI
         {
             PlayerCharacter player = CombatManager.Instance.player;
 
-            foreach (var effect in selectedChoice.consequences)
+            foreach (var outcome in selectedChoice.outcomes)
             {
-                effect.Execute(player, player, null);
+                outcome.Execute(CombatManager.Instance);
             }
 
             Debug.Log($"[Event] Đã chọn: {selectedChoice.choiceText}");

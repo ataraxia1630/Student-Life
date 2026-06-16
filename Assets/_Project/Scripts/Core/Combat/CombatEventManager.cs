@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DoiSinhVien.Data;
 using DoiSinhVien.UI;
@@ -11,70 +12,135 @@ namespace DoiSinhVien.Core
         public List<CombatEventData> possibleEvents;
 
         [Header("UI Reference")]
-         public EventPopupUI popupUI;
+        public EventPopupUI popupUI;
+
+        // Bộ nhớ tạm trong 1 trận đấu
+        private HashSet<CombatEventData> triggeredEvents = new();
+        private Dictionary<string, int> cardPlayTracker = new();
+        private int cardsPlayedThisTurn = 0;
 
         private void OnEnable()
         {
+            GameEvents.OnCombatStart += ResetEventMemory;
             GameEvents.OnTurnStart += RollForTurnStartEvents;
             GameEvents.OnTurnEnd += RollForTurnEndEvents;
+            GameEvents.OnCardPlayed += RollForCardPlayedEvents;
         }
 
         private void OnDisable()
         {
+            GameEvents.OnCombatStart -= ResetEventMemory;
             GameEvents.OnTurnStart -= RollForTurnStartEvents;
             GameEvents.OnTurnEnd -= RollForTurnEndEvents;
+            GameEvents.OnCardPlayed -= RollForCardPlayedEvents;
         }
 
-        private void RollForTurnStartEvents() => RollEvents(EventTriggerTiming.OnTurnStart);
+        private void ResetEventMemory()
+        {
+            triggeredEvents.Clear();
+            cardPlayTracker.Clear();
+            cardsPlayedThisTurn = 0;
+        }
+
+        private void RollForTurnStartEvents()
+        {
+            cardsPlayedThisTurn = 0; 
+            RollEvents(EventTriggerTiming.OnTurnStart);
+        }
         private void RollForTurnEndEvents() => RollEvents(EventTriggerTiming.OnTurnEnd);
 
-        private void RollEvents(EventTriggerTiming timing)
+        private void RollForCardPlayedEvents(Combat.CardInstance card)
         {
-            Debug.Log($"[Event System] Bắt đầu quét sự kiện cho thời điểm: {timing}");
+            cardsPlayedThisTurn++;
 
-            if (CombatManager.Instance == null)
-            {
-                Debug.LogWarning("[Event System] Hủy quét: CombatManager.Instance đang null!");
-                return;
-            }
-            if (possibleEvents == null || possibleEvents.Count == 0)
-            {
-                Debug.LogWarning("[Event System] Hủy quét: Danh sách possibleEvents trống không! (Nhớ kéo ScriptableObject vào)");
-                return;
-            }
+            // Lưu lịch sử đánh bài cho Event 05
+            string cardId = card.Data.id;
+            if (!cardPlayTracker.ContainsKey(cardId)) cardPlayTracker[cardId] = 0;
+            cardPlayTracker[cardId]++;
 
-            var validEvents = possibleEvents.FindAll(e => e != null && e.triggerTiming == timing);
-            Debug.Log($"[Event System] Có {validEvents.Count} sự kiện đúng thời điểm {timing} trong kho.");
+            RollEvents(EventTriggerTiming.OnCardPlayed, card);
+        }
+
+        private void RollEvents(EventTriggerTiming timing, Combat.CardInstance playedCard = null)
+        {
+            if (CombatManager.Instance == null || possibleEvents == null) return;
+
+            // Lọc các sự kiện: Đúng thời điểm + Chưa từng kích hoạt + Đủ điều kiện Logic
+            var validEvents = possibleEvents.FindAll(e =>
+                e != null &&
+                e.triggerTiming == timing &&
+                !triggeredEvents.Contains(e) &&
+                CheckConditions(e, playedCard));
 
             foreach (var evt in validEvents)
             {
-                float rollValue = Random.value;
-                Debug.Log($"[Event System] Đổ xúc xắc cho sự kiện '{evt.eventName}': Ra số {rollValue} (Cần <= {evt.triggerChance} để trúng)");
-
-                if (rollValue <= evt.triggerChance)
+                if (Random.value <= evt.triggerChance)
                 {
-                    Debug.Log($"[Event System] TRÚNG THƯỞNG! Kích hoạt sự kiện: {evt.eventName}");
-                    TriggerEvent(evt);
-                    break;
+                    triggeredEvents.Add(evt); // Đánh dấu đã chạy
+
+                    Debug.Log($"[Event System] POPUP EVENT Kích hoạt: {evt.eventName}");
+                    TriggerPopupEvent(evt);
+                    break; // Chỉ chạy 1 event mỗi lần để tránh kẹt UI
                 }
             }
         }
 
-        private void TriggerEvent(CombatEventData evt)
+        // BỘ LỌC ĐIỀU KIỆN SIÊU CẤP
+        private bool CheckConditions(CombatEventData evt, Combat.CardInstance playedCard)
         {
-            Debug.Log($"[Event System] Bắt đầu gọi UI. Kiểm tra: EventPopupUI.Instance có null không? -> {EventPopupUI.Instance == null}");
+            var combat = CombatManager.Instance;
+            var player = combat.player;
 
+            // 1. Kiểm tra Lượt (Turn)
+            if (evt.exactTurn > 0 && combat.currentTurn != evt.exactTurn) return false;
+            if (evt.minTurn > 0 && combat.currentTurn < evt.minTurn) return false;
+
+            // 2. Kiểm tra Máu Player
+            if (evt.maxPlayerHpPercent < 1f)
+            {
+                float hpPct = (float)player.CurrentHealth / player.MaxHealth;
+                if (hpPct > evt.maxPlayerHpPercent) return false;
+            }
+
+            // 3. Kiểm tra Máu Quái (Áp dụng cho Event 02)
+            if (evt.maxEnemyHpPercent < 1f)
+            {
+                bool hasLowHpEnemy = combat.activeEnemies.Any(e => e.CurrentHealth > 0 &&
+                                    ((float)e.CurrentHealth / e.data.maxHealth) <= evt.maxEnemyHpPercent);
+                if (!hasLowHpEnemy) return false;
+            }
+
+            // 4. Kiểm tra Status (Áp dụng cho Event 08)
+            if (evt.requiredStatus != null)
+            {
+                if (!player.ActiveStatuses.Keys.Any(s => s == evt.requiredStatus)) return false;
+            }
+
+            // 5. Kiểm tra Loại Trận Combat (Áp dụng cho Event 11)
+            //if (evt.requireEliteCombat && !combat.isEliteCombat) return false;
+
+            // 6. Kiểm tra Thẻ bài vừa đánh (Áp dụng cho Event 05, Event 10)
+            //if (evt.triggerTiming == EventTriggerTiming.OnCardPlayed && playedCard != null)
+            //{
+            //    if (evt.requiredCardType != CardType.None && playedCard.Data.type != evt.requiredCardType) return false;
+
+            //    if (!string.IsNullOrEmpty(evt.requiredCardId))
+            //    {
+            //        if (playedCard.Data.id != evt.requiredCardId) return false;
+            //        if (evt.requiredCardPlayCount > 0 && cardPlayTracker[evt.requiredCardId] < evt.requiredCardPlayCount) return false;
+            //    }
+            //}
+
+            return true;
+        }
+
+        private void TriggerPopupEvent(CombatEventData evt)
+        {
             if (EventPopupUI.Instance != null)
             {
-                Debug.Log("[Event System] Đã tìm thấy UI. Đang ra lệnh bật Popup...");
-                EventPopupUI.Instance.ShowEvent(evt, () =>
-                {
-                    Debug.Log("[Event] Người chơi đã bấm nút xong. Trả lại lượt cho trận đấu!");
+                EventPopupUI.Instance.ShowEvent(evt, () => {
+                    Debug.Log("[Event] Người chơi đã giải quyết xong sự kiện.");
                 });
-            }
-            else
-            {
-                Debug.LogError("[LỖI CHÍ MẠNG] Không tìm thấy EventPopupUI.Instance! Lệnh bật giao diện bị hủy.");
             }
         }
     }

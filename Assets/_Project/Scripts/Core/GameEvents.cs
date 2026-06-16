@@ -12,6 +12,7 @@ namespace DoiSinhVien.Core
         public static Action OnTurnEnd;
         public static Action<int> OnPlayerTookDamage;    
         public static Action OnCombatWin;
+        public static Action OnCombatLose;
         public static Action<int> OnCreditsChanged;
 
         public static Action<CardInstance> OnCardPlayed;

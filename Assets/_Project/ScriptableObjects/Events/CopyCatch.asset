@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 953f1a565ea6fcd458842d20ba20ac11, type: 3}
-  m_Name: SapIDE
+  m_Name: CopyCatch
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CombatEventData
-  eventName: "S\u1EADp IDE: Visual Studio \u0111\u1ED9t ng\u1ED9t v\u0103ng"
+  eventName: "Th\u1EA7y ph\xE1t hi\u1EC7n copy paste"
   description: 
   triggerTiming: 0
-  triggerChance: 0.1
+  triggerChance: 0.2
   exactTurn: 0
   minTurn: 0
   maxPlayerHpPercent: 1
@@ -24,9 +24,9 @@ MonoBehaviour:
   requireEliteCombat: 0
   isAutoEvent: 0
   choices:
-  - choiceText: "C\u1ED1 g\u1EAFng kh\xF4i ph\u1EE5c code (-1 energy)"
-    outcomes:
-    - {fileID: 11400000, guid: df7c537fbc1547e4887dde9f5109c2ed, type: 2}
-  - choiceText: "\u0110\u1EADp b\xE0n ph\xEDm (-10 tinh th\u1EA7n)"
+  - choiceText: "Th\u1EEBa nh\u1EADn (-10 tinh th\u1EA7n)"
     outcomes:
     - {fileID: 11400000, guid: d4cb4ef7bf0050c46b4543c9cd8e2e1d, type: 2}
+  - choiceText: "Ph\u1EE7 nh\u1EADn (50% qua, 50% m\u1EA5t 20 tinh th\u1EA7n)"
+    outcomes:
+    - {fileID: 11400000, guid: 6720ac42df85ddd4d9516fe2adeeaacf, type: 2}

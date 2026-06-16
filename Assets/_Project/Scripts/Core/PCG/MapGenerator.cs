@@ -35,6 +35,12 @@ namespace DoiSinhVien.Core
             }
         }
 
+        public void ResetMapGraph()
+        {
+            MapGraph.Clear();
+        } 
+            
+
         public void GenerateNewMap()
         {
             MapGraph.Clear();

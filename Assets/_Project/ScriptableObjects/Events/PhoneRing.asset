@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 953f1a565ea6fcd458842d20ba20ac11, type: 3}
-  m_Name: SapIDE
+  m_Name: PhoneRing
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CombatEventData
-  eventName: "S\u1EADp IDE: Visual Studio \u0111\u1ED9t ng\u1ED9t v\u0103ng"
+  eventName: "\u0110i\u1EC7n tho\u1EA1i rung"
   description: 
   triggerTiming: 0
-  triggerChance: 0.1
-  exactTurn: 0
+  triggerChance: 1
+  exactTurn: 4
   minTurn: 0
   maxPlayerHpPercent: 1
   maxEnemyHpPercent: 1
@@ -24,9 +24,9 @@ MonoBehaviour:
   requireEliteCombat: 0
   isAutoEvent: 0
   choices:
-  - choiceText: "C\u1ED1 g\u1EAFng kh\xF4i ph\u1EE5c code (-1 energy)"
+  - choiceText: "Xem \u0111i\u1EC7n tho\u1EA1i (+8 tinh th\u1EA7n, -1 energy)"
     outcomes:
+    - {fileID: 11400000, guid: 0591aba1c5414424d99943da5ecf1109, type: 2}
     - {fileID: 11400000, guid: df7c537fbc1547e4887dde9f5109c2ed, type: 2}
-  - choiceText: "\u0110\u1EADp b\xE0n ph\xEDm (-10 tinh th\u1EA7n)"
-    outcomes:
-    - {fileID: 11400000, guid: d4cb4ef7bf0050c46b4543c9cd8e2e1d, type: 2}
+  - choiceText: "Kh\xF4ng quan t\xE2m (ko thay \u0111\u1ED5i)"
+    outcomes: []
