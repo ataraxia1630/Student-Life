@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.EnemyData
   enemyId: E_SP
   enemyName: Supporter
-  enemyPrefab: {fileID: 2279909546300788952, guid: 7157107e144118644b6a06db42b6a998, type: 3}
+  enemyPrefab: {fileID: 4372285100679128122, guid: 795575f3f26bb474f86563d54a1e5146, type: 3}
   maxHealth: 20
   actionPool:
   - {fileID: 11400000, guid: 762131cb67a27bf4da1f443ad1d1f58a, type: 2}

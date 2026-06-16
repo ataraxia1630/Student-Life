@@ -48,10 +48,23 @@ namespace DoiSinhVien.Core
                 CurrentHealth -= remainingDamage;
                 Debug.Log($"[Sinh Viên] Vỡ Block! Nhận {remainingDamage} sát thương. Tinh thần còn: {CurrentHealth}");
 
-                if (CurrentHealth <= 0) Debug.Log("[Sinh Viên] BURNOUT! (Game Over)");
+                if (CurrentHealth <= 0)
+                {
+                    CurrentHealth = 0;
+                    Debug.Log("ÁP LỰC QUÁ TẢI! SINH VIÊN ĐÃ GỤC NGÃ!");
+
+                    CombatManager.Instance.ChangeState(CombatState.Combat_Lose);
+                } 
+                    
             }
         }
 
+        public void Heal(int amount)
+        {
+            if (amount > 0) CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth);
+            else CurrentHealth = Mathf.Max(CurrentHealth + amount, 0);
+        } 
+            
         public void ResetBlock()
         {
             CurrentBlock = 0;

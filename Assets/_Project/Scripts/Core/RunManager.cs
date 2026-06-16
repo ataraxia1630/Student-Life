@@ -26,5 +26,12 @@ namespace DoiSinhVien.Core
                 Destroy(gameObject);
             }
         }
+
+        public void Reset()
+        {
+            pendingEncounter = null;
+            currentNodeId = 0;
+            currentRoomType = NodeType.Start;
+        }
     }
 }

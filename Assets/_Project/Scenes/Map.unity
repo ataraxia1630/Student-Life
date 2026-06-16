@@ -724,8 +724,16 @@ PrefabInstance:
       value: PlayerInventory
       objectReference: {fileID: 0}
     - target: {fileID: 3109330793485498907, guid: 9e4f50ad558acee42bf54edf8dfa6de6, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109330793485498907, guid: 9e4f50ad558acee42bf54edf8dfa6de6, type: 3}
+      propertyPath: currentHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109330793485498907, guid: 9e4f50ad558acee42bf54edf8dfa6de6, type: 3}
       propertyPath: masterDeck.Array.size
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3109330793485498907, guid: 9e4f50ad558acee42bf54edf8dfa6de6, type: 3}
       propertyPath: 'masterDeck.Array.data[0]'

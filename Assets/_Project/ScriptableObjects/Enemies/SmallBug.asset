@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.EnemyData
   enemyId: ENEMY_02
   enemyName: Small Bug
-  enemyPrefab: {fileID: 2279909546300788952, guid: 7157107e144118644b6a06db42b6a998, type: 3}
+  enemyPrefab: {fileID: 7424321838278325897, guid: 1bd27679e87c5724cbabd8c15118836c, type: 3}
   maxHealth: 10
   actionPool:
   - {fileID: 11400000, guid: d590b073779881645973e5be453179e8, type: 2}

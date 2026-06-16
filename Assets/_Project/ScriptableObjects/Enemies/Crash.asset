@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.EnemyData
   enemyId: E_CR
   enemyName: Crash Sever
-  enemyPrefab: {fileID: 2279909546300788952, guid: 7157107e144118644b6a06db42b6a998, type: 3}
+  enemyPrefab: {fileID: 7753143589518824665, guid: f608858854fbd8d438de0216a6294d96, type: 3}
   maxHealth: 30
   actionPool:
   - {fileID: 11400000, guid: a3715c4e71913e946aefeb9d1837b5c8, type: 2}

@@ -16,10 +16,17 @@ MonoBehaviour:
   description: 
   triggerTiming: 0
   triggerChance: 0.1
+  exactTurn: 0
+  minTurn: 0
+  maxPlayerHpPercent: 1
+  maxEnemyHpPercent: 1
+  requiredStatus: {fileID: 0}
+  requireEliteCombat: 0
+  isAutoEvent: 0
   choices:
-  - choiceText: "C\u1ED1 g\u1EAFng kh\xF4i ph\u1EE5c code (Tr\u1EEB 1 energy)"
-    consequences:
-    - {fileID: 11400000, guid: ebd6eaac187d301459e3217a1f5944a8, type: 2}
+  - choiceText: "C\u1ED1 g\u1EAFng kh\xF4i ph\u1EE5c code (-1 energy)"
+    outcomes:
+    - {fileID: 11400000, guid: df7c537fbc1547e4887dde9f5109c2ed, type: 2}
   - choiceText: "\u0110\u1EADp b\xE0n ph\xEDm (-10 tinh th\u1EA7n)"
-    consequences:
-    - {fileID: 11400000, guid: 62c9236aab78cfe488412823219dea6e, type: 2}
+    outcomes:
+    - {fileID: 11400000, guid: d4cb4ef7bf0050c46b4543c9cd8e2e1d, type: 2}

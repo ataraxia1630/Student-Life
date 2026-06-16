@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953f1a565ea6fcd458842d20ba20ac11, type: 3}
+  m_Name: RoomateCall
+  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CombatEventData
+  eventName: "B\u1EA1n c\xF9ng ph\xF2ng g\u1ECDi"
+  description: 
+  triggerTiming: 0
+  triggerChance: 1
+  exactTurn: 0
+  minTurn: 0
+  maxPlayerHpPercent: 0.4
+  maxEnemyHpPercent: 1
+  requiredStatus: {fileID: 0}
+  requireEliteCombat: 0
+  isAutoEvent: 0
+  choices:
+  - choiceText: "Tr\xFAt b\u1EA7u t\xE2m s\u1EF1 (+15 tinh th\u1EA7n, -1 turn)"
+    outcomes:
+    - {fileID: 11400000, guid: 0591aba1c5414424d99943da5ecf1109, type: 2}
+    - {fileID: 11400000, guid: ff478b328f33d3444bd5004eafd6b4c5, type: 2}
+  - choiceText: "Qu\xE8n cha n\xE0 (+1 energy)"
+    outcomes:
+    - {fileID: 11400000, guid: 3272f6a2a3831834b98990454cc2db68, type: 2}
