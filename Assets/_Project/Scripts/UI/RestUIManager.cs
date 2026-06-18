@@ -36,7 +36,7 @@ namespace DoiSinhVien.UI
         {
             if (PlayerInventory.Instance == null) return;
 
-            int healAmount = Mathf.RoundToInt(PlayerInventory.Instance.maxHealth * 0.3f);
+            int healAmount = Mathf.RoundToInt(PlayerInventory.Instance.currentHealth * 0.3f);
 
             PlayerInventory.Instance.currentHealth = Mathf.Min(
                 PlayerInventory.Instance.currentHealth + healAmount,

@@ -14,7 +14,7 @@ public class ModifyStatsOutcome : EventOutcomeData
         if (hpChange > 0) combatManager.player.Heal(hpChange);
         else if (hpChange < 0) combatManager.player.TakeDamage(-hpChange);
 
-        if (energyChange != 0) combatManager.GainExtraNextEnergy(energyChange); 
+        if (energyChange != 0) combatManager.currentEnergy += energyChange; 
 
         if (blockChange > 0) combatManager.player.GainBlock(blockChange);
     }

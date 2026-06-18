@@ -16,7 +16,7 @@ MonoBehaviour:
   relicName: "M\u1EF3 t\xF4m H\u1EA3o H\u1EA3o"
   description: "K\u1EBFt th\xFAc m\u1ED7i tr\u1EADn chi\u1EBFn th\u1EAFng, h\u1ED3i
     5 Tinh th\u1EA7n."
-  icon: {fileID: 21300000, guid: 982aff6192f788c46a03efbc065f29c0, type: 3}
+  icon: {fileID: 5508431631483632836, guid: f3808aaea63cb5d4387e966a20ee794c, type: 3}
   price: 30
   rarity: 1
   passiveEffects:

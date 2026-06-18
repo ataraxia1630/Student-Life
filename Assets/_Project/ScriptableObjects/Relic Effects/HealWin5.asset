@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abc41fab8df1ab48a23ebdd8220a2fc, type: 3}
   m_Name: HealWin5
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.HealWinEffect
-  triggerMoment: 0
+  triggerMoment: 4
   healAmount: 5

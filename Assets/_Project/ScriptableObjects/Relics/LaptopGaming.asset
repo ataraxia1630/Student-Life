@@ -15,8 +15,8 @@ MonoBehaviour:
   id: RE_01
   relicName: Laptop Gaming
   description: "B\u1EAFt \u0111\u1EA7u tr\u1EADn \u0111\u1EA5u v\u1EDBi +1 Energy."
-  icon: {fileID: 21300000, guid: af9a5415b95ad4242a7ff42fcdb41530, type: 3}
-  price: 20
+  icon: {fileID: -4212027707405927793, guid: ef6e04dd13ceb2c4d90bf42a554b3e1c, type: 3}
+  price: 30
   rarity: 0
   passiveEffects:
   - {fileID: 11400000, guid: 9bfd0a5c1a2d086438ed8cf2682f9aeb, type: 2}

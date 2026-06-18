@@ -31,6 +31,7 @@ namespace DoiSinhVien.Core
 
         public void SetHealth(int amount)
         {
+            PlayerInventory.Instance.currentHealth = amount;
             CurrentHealth = amount;
         }
 
@@ -45,24 +46,23 @@ namespace DoiSinhVien.Core
             {
                 int remainingDamage = amount - CurrentBlock;
                 CurrentBlock = 0;
-                CurrentHealth -= remainingDamage;
+                SetHealth(CurrentHealth - remainingDamage);
                 Debug.Log($"[Sinh Viên] Vỡ Block! Nhận {remainingDamage} sát thương. Tinh thần còn: {CurrentHealth}");
 
                 if (CurrentHealth <= 0)
                 {
-                    CurrentHealth = 0;
+                    SetHealth(0);
                     Debug.Log("ÁP LỰC QUÁ TẢI! SINH VIÊN ĐÃ GỤC NGÃ!");
 
                     CombatManager.Instance.ChangeState(CombatState.Combat_Lose);
                 } 
-                    
             }
         }
 
         public void Heal(int amount)
         {
-            if (amount > 0) CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth);
-            else CurrentHealth = Mathf.Max(CurrentHealth + amount, 0);
+            if (amount > 0) SetHealth(Mathf.Min(CurrentHealth + amount, MaxHealth));
+            else SetHealth(Mathf.Max(CurrentHealth + amount, 0));
         } 
             
         public void ResetBlock()

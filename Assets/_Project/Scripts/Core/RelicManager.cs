@@ -11,6 +11,7 @@ namespace DoiSinhVien.Core
             GameEvents.OnCombatStart += HandleCombatStart;
             GameEvents.OnCombatWin += HandleCombatWin;
             GameEvents.OnCardPlayed += HandleCardPlayed;
+            GameEvents.OnTurnStart += () => TriggerRelics(RelicTrigger.TurnStart);
         }
 
         private void OnDisable()
@@ -18,6 +19,7 @@ namespace DoiSinhVien.Core
             GameEvents.OnCombatStart -= HandleCombatStart;
             GameEvents.OnCombatWin -= HandleCombatWin;
             GameEvents.OnCardPlayed -= HandleCardPlayed;
+            GameEvents.OnTurnStart -= () => TriggerRelics(RelicTrigger.TurnStart);
         }
 
         private void TriggerRelics(RelicTrigger trigger, object context = null)

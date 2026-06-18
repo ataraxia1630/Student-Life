@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: IT_DEADLINE
   cardName: "Xin D\u1EDDi Deadline"
-  price: 0
+  price: 15
   description: "Block 8. K\u1EBB th\xF9 b\u1ECF qua 1 action."
   flavorText: 
   baseDamage: 0

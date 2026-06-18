@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: IT_DEPLOY
   cardName: Deploy Production
-  price: 0
+  price: 30
   description: "G\xE2y 25 dmg, x\xE1c su\u1EA5t 30% ch\u1ECBu 10dmg"
   flavorText: 
   baseDamage: 25

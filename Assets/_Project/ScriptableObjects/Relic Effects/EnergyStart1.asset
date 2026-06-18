@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d29804ef11d1dd4aaacb9e6efd62ba4, type: 3}
   m_Name: EnergyStart1
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.EnergyStartEffect
-  triggerMoment: 0
+  triggerMoment: 1
   bonusEnergy: 1
