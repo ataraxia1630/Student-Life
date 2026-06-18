@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: CopyPaste
   cardName: Copy-Paste
-  price: 0
-  description: "G\xE2y 3 DMG. N\u1EBFu \u0111\xE1nh 2 l\u1EA7n li\xEAn ti\u1EBFp,
+  price: 10
+  description: "G\xE2y 3 DMG. N\u1EBFu \u0111\xE1nh 2 l\xE1 Attack li\xEAn ti\u1EBFp,
     l\u1EA7n sau x2 DMG"
   flavorText: 
   baseDamage: 3

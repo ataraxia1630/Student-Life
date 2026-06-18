@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: IT_CAYDEM
   cardName: "C\xE0y \u0111\xEAm"
-  price: 0
+  price: 20
   description: "G\xE2y 18 dmg, l\u01B0\u1EE3t sau -1 energy"
   flavorText: 
   baseDamage: 18

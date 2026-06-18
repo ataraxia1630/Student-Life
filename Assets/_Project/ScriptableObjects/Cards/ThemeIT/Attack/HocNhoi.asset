@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: IT_HOCNHOI
   cardName: "H\u1ECDc Nh\u1ED3i"
-  price: 0
+  price: 10
   description: "(Exhasted) G\xE2y 10 dmg."
   flavorText: 
   baseDamage: 10

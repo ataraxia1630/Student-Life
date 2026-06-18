@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: IT_BUGFIX
   cardName: Bug Fix
-  price: 0
+  price: 10
   description: "G\xE2y 6 dmg"
   flavorText: "S\u1EEDa 1 bug, sinh ra 3 bug m\u1EDBi"
   baseDamage: 6

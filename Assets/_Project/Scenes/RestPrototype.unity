@@ -379,6 +379,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 188095148}
+    - target: {fileID: 4876491350341140161, guid: d622d651309158d48842e483159022a5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876491350341140161, guid: d622d651309158d48842e483159022a5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876491350341140161, guid: d622d651309158d48842e483159022a5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876491350341140161, guid: d622d651309158d48842e483159022a5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5668059513510022946, guid: d622d651309158d48842e483159022a5, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -476,6 +492,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6680912384555007879, guid: d622d651309158d48842e483159022a5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866424224593138707, guid: d622d651309158d48842e483159022a5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866424224593138707, guid: d622d651309158d48842e483159022a5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866424224593138707, guid: d622d651309158d48842e483159022a5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866424224593138707, guid: d622d651309158d48842e483159022a5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

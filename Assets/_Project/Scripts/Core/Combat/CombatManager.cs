@@ -76,6 +76,9 @@ namespace DoiSinhVien.Core
 
                 case CombatState.Player_Turn_Start:
                     currentEnergy = maxEnergy + extraNextEnergy;
+                    extraNextEnergy = 0;
+                    //currentEnergy = maxEnergy;
+                    GameEvents.OnTurnStart?.Invoke();
                     StartCoroutine(TurnStartSequence());
                     break;
 
@@ -111,14 +114,14 @@ namespace DoiSinhVien.Core
             }
         }
 
-        public void GainExtraNextEnergy(int amount)
-        {
-            extraNextEnergy += amount;
-        }
+        //public void GainExtraNextEnergy(int amount)
+        //{
+        //    extraNextEnergy += amount;
+        //    Debug.Log($"[CombatManager] Đã nhận {amount} Energy cho hiệp sau. Tổng Energy hiệp sau sẽ là: {maxEnergy + extraNextEnergy}");
+        //}
 
         private IEnumerator TurnStartSequence()
         {
-            GameEvents.OnTurnStart?.Invoke();
             Debug.Log("[TEST] Đã phát OnTurnStart.");
 
             if (EventPopupUI.Instance != null)
@@ -192,7 +195,7 @@ namespace DoiSinhVien.Core
             player.TriggerTurnEndHooks();
             yield return new WaitForSeconds(0.5f);
             currentTurn++;
-            extraNextEnergy = 0;
+            //extraNextEnergy = 0;
             isSkipTurn = false;
             ChangeState(CombatState.Player_Turn_Start);
         }
@@ -266,8 +269,8 @@ namespace DoiSinhVien.Core
 
             if (consecutiveCardCount == 3)
             {
-                player.AddStatus(nextTurnEnergyStatus, 1);
                 NotificationManager.Instance.ShowMessage("FLOW STATE: +1 Energy hiệp sau!", Color.yellow);
+                extraNextEnergy = 1;
                 consecutiveCardCount = 0; 
             }
             

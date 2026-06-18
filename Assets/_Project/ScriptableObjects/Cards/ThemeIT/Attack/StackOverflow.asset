@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: IT_STACK
   cardName: Stack Overflow
-  price: 0
+  price: 15
   description: "G\xE2y 8 dmg, c\u1ED9ng 2 dmg cho m\u1ED7i l\xE1 b\xE0i tr\xEAn tay"
   flavorText: 
   baseDamage: 8

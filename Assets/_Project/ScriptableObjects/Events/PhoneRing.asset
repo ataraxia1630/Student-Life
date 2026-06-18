@@ -15,7 +15,7 @@ MonoBehaviour:
   eventName: "\u0110i\u1EC7n tho\u1EA1i rung"
   description: 
   triggerTiming: 0
-  triggerChance: 1
+  triggerChance: 0.2
   exactTurn: 4
   minTurn: 0
   maxPlayerHpPercent: 1

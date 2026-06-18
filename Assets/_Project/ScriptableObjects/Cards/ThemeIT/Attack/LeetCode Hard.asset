@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: Leetcode
   cardName: Hard LeetCode
-  price: 0
+  price: 15
   description: "G\xE2y 12 DMG. "
   flavorText: 
   baseDamage: 12

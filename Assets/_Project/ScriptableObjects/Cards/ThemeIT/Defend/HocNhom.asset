@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: IT_HOCNHOM
   cardName: "H\u1ECDc Nh\xF3m"
-  price: 0
+  price: 8
   description: "T\u1EA1o 5 block. R\xFAt 1 l\xE1 t\u1EEB b\u1ED9 b\xE0i."
   flavorText: 
   baseDamage: 0

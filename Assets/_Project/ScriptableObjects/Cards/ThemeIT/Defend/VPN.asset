@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Data.CardData
   id: IT_VPN
   cardName: "VPN Tr\u01B0\u1EDDng"
-  price: 0
+  price: 10
   description: "Block 5. N\u1EBFu l\xE1 sau l\xE0 Defend th\xEC \u0111\u01B0\u1EE3c
     +5 block n\u1EEFa."
   flavorText: 

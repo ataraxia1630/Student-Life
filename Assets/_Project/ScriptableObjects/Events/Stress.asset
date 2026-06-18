@@ -15,7 +15,7 @@ MonoBehaviour:
   eventName: "Ki\u1EC7t s\u1EE9c"
   description: 
   triggerTiming: 0
-  triggerChance: 1
+  triggerChance: 0.4
   exactTurn: 0
   minTurn: 6
   maxPlayerHpPercent: 1
