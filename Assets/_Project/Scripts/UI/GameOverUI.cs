@@ -32,11 +32,13 @@ namespace DoiSinhVien.UI
         private void RestartCombat()
         {
             MapGenerator.Instance.ResetMapGraph();
+            AudioManager.Instance.PlayBGM("Waiting");
             SceneManager.LoadScene(mapSceneName);
         }
 
         private void ReturnToMenu()
         {
+            AudioManager.Instance.PlayBGM("Waiting");
             SceneManager.LoadScene(mainSceneName);
         }
     }

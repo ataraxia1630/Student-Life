@@ -2,6 +2,8 @@
 using TMPro;
 using DoiSinhVien.Core;
 using UnityEngine.SceneManagement;
+using UnityEngine.Playables;
+using DoiSinhVien.Visual;
 
 namespace DoiSinhVien.UI
 {
@@ -22,6 +24,7 @@ namespace DoiSinhVien.UI
             choicePanel.SetActive(true);
             cardSelectPanel.SetActive(false);
             UpdateStatusText();
+            AudioManager.Instance.PlayBGM("Rest");
         }
 
         private void UpdateStatusText()
@@ -44,6 +47,7 @@ namespace DoiSinhVien.UI
             );
 
             Debug.Log($"[Quán Cafe] Đã chợp mắt một lúc. Hồi {healAmount} Tinh thần!");
+            NotificationManager.Instance.ShowMessage($"Đã chợp mắt một lúc. Hồi {healAmount} Tinh thần!", Color.green);
             UpdateStatusText();
 
             ReturnToMap();
@@ -78,6 +82,7 @@ namespace DoiSinhVien.UI
         public void ReturnToMap()
         {
             Debug.Log("Rời khỏi quán, chuẩn bị mở Map...");
+            AudioManager.Instance.PlayBGM("Waiting");
             SceneManager.LoadScene(mapSceneName);
         }
     }

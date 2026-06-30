@@ -71,6 +71,7 @@ namespace DoiSinhVien.Core
                 case CombatState.Initialize:
                     currentTurn = 1;
                     GameEvents.OnCombatStart?.Invoke();
+                    AudioManager.Instance.PlayBGM("Combat");
                     ChangeState(CombatState.Player_Turn_Start);
                     break;
 
@@ -105,10 +106,12 @@ namespace DoiSinhVien.Core
                     break;
                 case CombatState.Combat_Win:
                     GameEvents.OnCombatWin?.Invoke();
+                    AudioManager.Instance.PlayBGM("Win");
                     StartCoroutine(HandleVictoryRoutine());
                     break;
                 case CombatState.Combat_Lose:
                     GameEvents.OnCombatLose?.Invoke();
+                    AudioManager.Instance.PlayBGM("Lose");
                     SceneManager.LoadScene("GameOver");
                     break;
             }
