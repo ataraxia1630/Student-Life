@@ -63,5 +63,24 @@ namespace DoiSinhVien.Core
             ownedRelics.Add(relic);
             Debug.Log($"[Inventory] Đã nhận Relic: {relic.relicName}");
         }
+
+        // Thêm hàm này vào PlayerInventory.cs
+        public void ResetRunData()
+        {
+            Debug.Log("[System] Đang dọn dẹp dữ liệu để chuẩn bị cho Run mới...");
+
+            currentHealth = maxHealth;
+            currentCredits = 0; 
+
+            if (ownedRelics != null)
+            {
+                ownedRelics.Clear();
+            }
+
+            //if (masterDeck != null)
+            //{
+            //    masterDeck.Clear();
+            //}
+        }
     }
 }

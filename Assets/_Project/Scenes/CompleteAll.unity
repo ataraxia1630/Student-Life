@@ -208,8 +208,9 @@ GameObject:
   m_Component:
   - component: {fileID: 443434425}
   - component: {fileID: 443434426}
+  - component: {fileID: 443434427}
   m_Layer: 0
-  m_Name: GameOverUI
+  m_Name: GameUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -247,6 +248,18 @@ MonoBehaviour:
   mainMenuButton: {fileID: 783814115}
   mapSceneName: Map
   mainSceneName: MainMenuScene
+--- !u!114 &443434427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443434424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a81a73e3a855e31498235660606d8c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &744105622
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +317,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GAME OVER
+  m_text: CONGRATULATION!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -313,8 +326,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290576537
-  m_fontColor: {r: 0.6009367, g: 0, b: 0.740566, a: 1}
+    rgba: 4279485811
+  m_fontColor: {r: 0.45143527, g: 0.7735849, b: 0.072979696, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -392,13 +405,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 906116959994819916, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 906116959994819916, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 906116959994819916, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 443434427}
+    - target: {fileID: 906116959994819916, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 906116959994819916, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetRun
+      objectReference: {fileID: 0}
+    - target: {fileID: 906116959994819916, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ResetRunData, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 906116959994819916, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2526793539574971670, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
       propertyPath: m_Spacing
       value: -280
       objectReference: {fileID: 0}
     - target: {fileID: 2686189861066050256, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
       propertyPath: m_Name
-      value: LoseCanvas
+      value: CompleteCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 3378723068689657959, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
       propertyPath: m_Pivot.x
@@ -479,6 +520,34 @@ PrefabInstance:
     - target: {fileID: 3378723068689657959, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005022604516058656, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005022604516058656, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005022604516058656, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 443434427}
+    - target: {fileID: 4005022604516058656, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005022604516058656, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetRun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005022604516058656, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ResetRunData, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4005022604516058656, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7043859370927765348, guid: 3d65f0258e36e1b43a6d2aa630cd2cb2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -704,7 +773,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Thi\u1EBFu ch\xFAt n\u1EEFa th\xF4i, th\u1EED l\u1EA1i run m\u1EDBi!!!"
+  m_text: "\u0110\xE3 ho\xE0n th\xE0nh to\xE0n b\u1ED9 run, b\u1EAFt \u0111\u1EA7u
+    run m\u1EDBi!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -713,8 +783,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4288297608
-  m_fontColor: {r: 0.53216714, g: 0.2278391, b: 0.6037736, a: 1}
+    rgba: 4279726370
+  m_fontColor: {r: 0.13257532, g: 0.4433962, b: 0.09202564, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

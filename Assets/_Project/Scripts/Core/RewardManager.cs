@@ -3,6 +3,8 @@ using UnityEngine;
 using DoiSinhVien.Data;
 using UnityEngine.SceneManagement;
 using DoiSinhVien.View;
+using UnityEngine.Playables;
+using DoiSinhVien.Visual;
 
 namespace DoiSinhVien.Core
 {
@@ -38,6 +40,7 @@ namespace DoiSinhVien.Core
             if (isElite)
             {
                 Debug.Log("Phòng Elite! Thưởng lớn: 50k & Thẻ bài xịn.");
+                NotificationManager.Instance.ShowMessage("Phòng Elite! Thưởng lớn: 50k & Thẻ bài hiếm.", Color.green);
                 PlayerInventory.Instance.AddCredits(50);
 
                 pool = entireCardPool.FindAll(c => c.rarity == CardRarity.Uncommon || c.rarity == CardRarity.Rare);
@@ -45,6 +48,7 @@ namespace DoiSinhVien.Core
             else
             {
                 Debug.Log("Phòng Combat Thường! Thưởng cơ bản: 15k & Thẻ bài cơ bản.");
+                NotificationManager.Instance.ShowMessage("Phòng Combat Thường! Thưởng cơ bản: 15k & Thẻ bài cơ bản.", Color.green);
                 PlayerInventory.Instance.AddCredits(15); 
 
                 pool = entireCardPool.FindAll(c => c.rarity == CardRarity.Common || c.rarity == CardRarity.Uncommon);

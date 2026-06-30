@@ -42,7 +42,6 @@ namespace DoiSinhVien.Core
         public StatusData nextTurnEnergyStatus;
         private int extraNextEnergy = 0;
 
-
         private void Awake()
         {
             if (Instance == null) Instance = this;
@@ -292,8 +291,16 @@ namespace DoiSinhVien.Core
             yield return new WaitForSeconds(1f);
             deckManager.DiscardHand();
 
-            if (RewardManager.Instance != null)
+            if (RunManager.Instance.currentRoomType == NodeType.Boss)
             {
+                yield return new WaitForSeconds(2f);
+                SceneManager.LoadScene("CompleteAll");
+            }
+
+            else if (RewardManager.Instance != null)
+            {
+                NotificationManager.Instance.ShowMessage("Diệt sạch toàn bộ quái! Chiến thắng");
+                yield return new WaitForSeconds(2f);
                 RewardManager.Instance.GenerateCardRewards();
             }
         }
