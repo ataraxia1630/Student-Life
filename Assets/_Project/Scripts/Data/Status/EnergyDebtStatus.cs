@@ -15,7 +15,7 @@ namespace DoiSinhVien.Data
 
                 NotificationManager.Instance.ShowMessage($"-{stack} Năng lượng do Cày Đêm!", Color.yellow);
 
-                player.AddStatus(this, -stack);
+                player.AddStatus(this, stack);
             }
         }
     }
