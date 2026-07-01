@@ -42,7 +42,6 @@ namespace DoiSinhVien.Core
         public StatusData nextTurnEnergyStatus;
         private int extraNextEnergy = 0;
 
-
         private void Awake()
         {
             if (Instance == null) Instance = this;
@@ -71,6 +70,7 @@ namespace DoiSinhVien.Core
                 case CombatState.Initialize:
                     currentTurn = 1;
                     GameEvents.OnCombatStart?.Invoke();
+                    AudioManager.Instance.PlayBGM("Combat");
                     ChangeState(CombatState.Player_Turn_Start);
                     break;
 
@@ -105,10 +105,12 @@ namespace DoiSinhVien.Core
                     break;
                 case CombatState.Combat_Win:
                     GameEvents.OnCombatWin?.Invoke();
+                    AudioManager.Instance.PlayBGM("Win");
                     StartCoroutine(HandleVictoryRoutine());
                     break;
                 case CombatState.Combat_Lose:
                     GameEvents.OnCombatLose?.Invoke();
+                    AudioManager.Instance.PlayBGM("Lose");
                     SceneManager.LoadScene("GameOver");
                     break;
             }
@@ -289,8 +291,16 @@ namespace DoiSinhVien.Core
             yield return new WaitForSeconds(1f);
             deckManager.DiscardHand();
 
-            if (RewardManager.Instance != null)
+            if (RunManager.Instance.currentRoomType == NodeType.Boss)
             {
+                yield return new WaitForSeconds(2f);
+                SceneManager.LoadScene("CompleteAll");
+            }
+
+            else if (RewardManager.Instance != null)
+            {
+                NotificationManager.Instance.ShowMessage("Diệt sạch toàn bộ quái! Chiến thắng");
+                yield return new WaitForSeconds(2f);
                 RewardManager.Instance.GenerateCardRewards();
             }
         }

@@ -38,6 +38,7 @@ namespace DoiSinhVien.Core
 
         private void Start()
         {
+            AudioManager.Instance.PlayBGM("Shop");
             RefreshShop();
         }
 
@@ -75,6 +76,7 @@ namespace DoiSinhVien.Core
 
         public void LeaveShop()
         {
+            AudioManager.Instance.PlayBGM("Waiting");
             SceneManager.LoadScene(mapSceneName);
         }
     }

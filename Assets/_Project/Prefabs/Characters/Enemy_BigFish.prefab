@@ -213,6 +213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6346750904412761373}
   - component: {fileID: 8136064811017831561}
+  - component: {fileID: 2909724352242217857}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -229,7 +230,7 @@ Transform:
   m_GameObject: {fileID: 2647971492234226910}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.01, z: 0}
+  m_LocalPosition: {x: 0, y: -2.51, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -294,6 +295,21 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &2909724352242217857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2647971492234226910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a654b29a7356b7f4b8c6781d32718e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoiSinhVien.Visual.BrealthingAnimation
+  breathSpeed: 3
+  breathMagnitude: 0.05
+  useSquashAndStretch: 1
 --- !u!1 &2880452614621900318
 GameObject:
   m_ObjectHideFlags: 0

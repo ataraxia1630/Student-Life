@@ -27,6 +27,7 @@ namespace DoiSinhVien.UI
 
         private void Start()
         {
+            AudioManager.Instance.PlayBGM("Shop");
             UpdateCreditText(PlayerInventory.Instance != null ? PlayerInventory.Instance.currentCredits : 0);
             GenerateShop();
         }
@@ -87,6 +88,7 @@ namespace DoiSinhVien.UI
 
         public void LeaveShop()
         {
+            AudioManager.Instance.PlayBGM("Waiting");
             SceneManager.LoadScene(mapSceneName);
         }
     }
